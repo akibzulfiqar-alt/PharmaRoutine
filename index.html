@@ -26,8 +26,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
+
+
   <style>
     * { box-sizing: border-box; }
+
+
 
 
     body {
@@ -38,14 +42,22 @@
     }
 
 
+
+
     .container { max-width: 1400px; margin: auto; padding: 20px; }
+
+
 
 
     .header-logo { text-align: center; margin-bottom: 10px; }
     .header-logo img { width: 85px; height: 85px; object-fit: contain; }
 
 
+
+
     h1 { text-align: center; margin: 5px 0; }
+
+
 
 
     .university-info {
@@ -58,6 +70,8 @@
     .university-info .small { margin-top: 5px; color: #666; font-size: 15px; }
 
 
+
+
     .developer-credit {
       text-align: center;
       margin: 10px 0 20px;
@@ -65,6 +79,8 @@
       color: #777;
       font-style: italic;
     }
+
+
 
 
     .status {
@@ -77,7 +93,11 @@
     }
 
 
+
+
     .error { color: #b00020; font-weight: bold; }
+
+
 
 
     /* Update banner */
@@ -101,8 +121,12 @@
     .update-banner button:hover { background: #d97706; }
 
 
+
+
     /* Controls */
     #controls { display: none; }
+
+
 
 
     .batch-bar {
@@ -122,6 +146,8 @@
     #batchFilter { font-size: 16px; padding: 12px; }
 
 
+
+
     .view-tabs { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
     .view-tabs button {
       width: auto;
@@ -133,6 +159,8 @@
     }
     .view-tabs button:hover { background: #eef5fb; }
     .view-tabs button.active { background: #1f4e78; color: white; }
+
+
 
 
     details.more {
@@ -149,6 +177,8 @@
     }
 
 
+
+
     .filters {
       padding: 0 15px 15px;
       display: grid;
@@ -160,6 +190,8 @@
     .button-area { display: flex; align-items: end; }
 
 
+
+
     input, select {
       width: 100%;
       padding: 10px;
@@ -169,6 +201,8 @@
       font-size: 14px;
     }
     input:focus, select:focus { outline: none; border-color: #1f4e78; }
+
+
 
 
     button {
@@ -184,12 +218,16 @@
     button:hover { background: #173a5c; }
 
 
+
+
     #conflictBtn {
       display: none;
       margin: 0 0 15px;
       background: #b00020;
     }
     #conflictBtn:hover { background: #7a0016; }
+
+
 
 
     /* Info panel (now / next) */
@@ -216,7 +254,11 @@
     .info-card .sub { margin-top: 3px; color: #444; font-size: 14px; }
 
 
+
+
     .result-count { margin-bottom: 10px; font-weight: bold; color: #444; }
+
+
 
 
     .table-wrapper {
@@ -226,6 +268,8 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,.08);
     }
+
+
 
 
     table {
@@ -251,6 +295,8 @@
     tr:hover { background: #eef5fb; }
 
 
+
+
     .saturday { background: #f0f8ff; }
     .sunday { background: #f5fff0; }
     .monday { background: #fff8e7; }
@@ -259,9 +305,13 @@
     .thursday { background: #f8f0ff; }
 
 
+
+
     tr.row-past, .mobile-card.row-past { opacity: .5; }
     tr.row-now, .mobile-card.row-now { background: #dcfce7 !important; }
     tr.row-next, .mobile-card.row-next { background: #fef3c7 !important; }
+
+
 
 
     .badge {
@@ -277,6 +327,8 @@
     .badge.next { background: #d97706; }
 
 
+
+
     .no-data {
       text-align: center;
       padding: 30px;
@@ -286,12 +338,18 @@
     }
 
 
+
+
     .mobile-card { display: none; }
+
+
 
 
     @media (max-width: 900px) {
       .filters { grid-template-columns: repeat(2, 1fr); }
     }
+
+
 
 
     @media (max-width: 600px) {
@@ -301,7 +359,11 @@
       th, td { padding: 8px; font-size: 13px; }
 
 
+
+
       .table-wrapper { display: none; }
+
+
 
 
       .mobile-card {
@@ -318,6 +380,8 @@
     }
 
 
+
+
     /* Action buttons / footer */
     .action-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
     .action-row button {
@@ -327,6 +391,8 @@
       background: #0f766e;
     }
     .action-row button:hover { background: #115e59; }
+
+
 
 
     .footer-links {
@@ -346,6 +412,8 @@
       font-size: 14px;
     }
     .footer-links button:hover { background: none; color: #173a5c; }
+
+
 
 
     /* Weekly grid */
@@ -391,6 +459,8 @@
     .grid-entry .sub { font-size: 11px; color: #444; }
 
 
+
+
     /* Conflict modal (admin only) */
     .conflict-modal {
       display: none;
@@ -431,9 +501,11 @@
     }
     #conflictContent { padding: 20px; font-size: 16px; min-height: 80px; }
 
+
     /* ---------- v1.4 additions ---------- */
     #teacherFilter { font-size: 16px; padding: 12px; }
     .teacher-box { margin-top: 12px; }
+
 
     .offline-bar {
       display: none;
@@ -450,6 +522,7 @@
     }
     .offline-bar button { width: auto; padding: 6px 14px; flex-shrink: 0; }
 
+
     .notice-banner {
       background: white;
       border-radius: 10px;
@@ -463,6 +536,7 @@
     .notice-item.cancel { background: #fee2e2; color: #7f1d1d; }
     .notice-item.room, .notice-item.time { background: #fef3c7; color: #78350f; }
     .notice-item.info { background: #e0f2fe; color: #0c4a6e; }
+
 
     .nbadge {
       display: inline-block;
@@ -478,10 +552,12 @@
     .nbadge.room, .nbadge.time { background: #d97706; }
     .nbadge.info { background: #0284c7; }
 
+
     .notice-line { font-size: 13px; margin-top: 4px; padding: 3px 7px; border-radius: 5px; }
     .notice-line.cancel { background: #fee2e2; color: #7f1d1d; }
     .notice-line.room, .notice-line.time { background: #fef3c7; color: #78350f; }
     .notice-line.info { background: #e0f2fe; color: #0c4a6e; }
+
 
     tr.row-cancelled td, .mobile-card.row-cancelled { background: #fee2e2 !important; }
     .grid-entry.cancelled { background: #fee2e2; }
@@ -489,8 +565,10 @@
     .grid-entry .nbadge { margin-left: 0; margin-top: 3px; }
     .info-card.cancelled { border-left-color: #dc2626; background: #fef2f2; }
 
+
     .countdown { margin-top: 6px; font-weight: bold; font-size: 15px; color: #065f46; }
     .info-card.next .countdown { color: #92400e; }
+
 
     .free-body { padding: 0 15px 15px; }
     .free-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
@@ -503,7 +581,9 @@
     .free-item .free-until { color: #166534; font-size: 12px; margin-top: 2px; }
     .free-note { font-size: 12px; color: #777; margin-top: 10px; }
 
+
     .privacy-note { flex-basis: 100%; text-align: center; font-size: 12px; color: #777; }
+
 
     /* =====================================================================
        v1.5 design system
@@ -522,7 +602,9 @@
       --shadow: 0 1px 2px rgba(16,24,40,.06), 0 2px 8px rgba(16,24,40,.06);
     }
 
+
     html { -webkit-text-size-adjust: 100%; }
+
 
     body {
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -531,6 +613,7 @@
       background: var(--bg);
       color: var(--ink);
     }
+
 
     .ic {
       width: 1.15em; height: 1.15em;
@@ -543,6 +626,7 @@
       overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
 
+
     /* ---- cards share one look and one spacing scale ---- */
     .batch-bar, details.more, .info-card, .notice-banner, .update-banner, .offline-bar, .status {
       border-radius: var(--radius);
@@ -552,6 +636,7 @@
     .batch-bar { padding: var(--s2); }
     .grid-wrapper, .table-wrapper, .no-data { border-radius: var(--radius); box-shadow: var(--shadow); }
     .info-card { padding: 14px 16px; }
+
 
     /* ---- 5. compact header ---- */
     .app-header {
@@ -568,6 +653,7 @@
       background: #f1f5f9; border-radius: 999px; padding: 4px 12px;
     }
     .app-updated b { color: #334155; }
+
 
     /* ---- 8. typography + form controls ---- */
     .batch-bar label, .filter-group label {
@@ -586,6 +672,7 @@
     input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(31,78,120,.18); }
     #batchFilter, #teacherFilter { font-size: 16px; padding: 12px 38px 12px 12px; }
 
+
     /* ---- 10. buttons: hover, press, keyboard focus ---- */
     button { font-weight: 600; transition: background .15s, box-shadow .15s, transform .08s, border-color .15s; }
     button:hover { box-shadow: 0 2px 6px rgba(16,24,40,.15); }
@@ -596,6 +683,7 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
+
 
     /* ---- 1. segmented controls (role toggle + view tabs) ---- */
     .seg {
@@ -611,6 +699,7 @@
     .role-toggle { margin-bottom: var(--s2); max-width: 340px; }
     .view-tabs.seg { margin-top: var(--s2); }
     .select-box { margin: 0; }
+
 
     /* ---- 1. toolbar: one main action + a More menu ---- */
     .toolbar { display: flex; gap: var(--s1); margin-top: var(--s2); align-items: stretch; }
@@ -637,6 +726,7 @@
     }
     .menu-list button:hover { background: #f1f5f9; box-shadow: none; }
 
+
     /* ---- collapsible cards ---- */
     details.more summary {
       display: flex; align-items: center; gap: 10px; list-style: none;
@@ -657,11 +747,13 @@
     .chip.open { background: #dcfce7; color: #166534; }
     .chip:empty { display: none; }
 
+
     /* ---- 7. free rooms ---- */
     .free-closed {
       display: flex; align-items: center; gap: 10px; background: #f8fafc; color: #475569;
       border: 1px dashed #cbd5e1; border-radius: 10px; padding: 12px 14px; font-size: 14px;
     }
+
 
     /* ---- 2 + 3. grid legend, today row, rounded entries ---- */
     .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: #475569; margin: 0 0 var(--s1); }
@@ -675,12 +767,14 @@
     .dot.cancel { background: #fee2e2; }
     .dot.today { background: var(--primary); border-color: var(--primary); }
 
+
     .grid-entry { border-radius: 6px; padding: 5px 4px; }
     .grid-table .grid-day.today { background: var(--primary); color: #fff; box-shadow: inset 5px 0 0 #f59e0b; }
     .grid-today-row td.grid-empty { background: #eaf2fb; }
     .grid-today-row td.grid-cell { background: #f5f9fe; }
     .today-tag { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; margin-top: 2px; color: #fcd34d; }
     .grid-table tbody tr:hover { background: transparent; }
+
 
     /* ---- 9. loading skeleton ---- */
     .status { text-align: left; }
@@ -696,6 +790,7 @@
     .sk-card { height: 72px; }
     .status-note { text-align: center; color: var(--muted); font-size: 13px; margin-top: 12px; }
 
+
     /* ---- 11. phone cards ---- */
     .mobile-card { border-left: 4px solid var(--primary); border-radius: 12px; padding: 12px 14px; transition: transform .1s, box-shadow .15s; }
     .mobile-card:active { transform: scale(.99); }
@@ -707,10 +802,12 @@
     .mobile-card .mc-course { font-size: 17px; font-weight: 700; margin: 0 0 8px; }
     .mobile-card .mc-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
     .mobile-card .mc-meta span { background: #f1f5f9; border-radius: 999px; padding: 3px 10px; font-size: 12px; color: #334155; }
+    .swipe-hint { display: none; font-size: 12px; color: #475569; margin: 0 0 6px; }
     .rotate-hint {
       display: none; align-items: center; gap: 8px; font-size: 13px; color: #475569;
       background: #eef5fb; border-radius: 10px; padding: 8px 12px; margin-bottom: var(--s1);
     }
+
 
     /* ---- 12. bottom navigation (phones) ---- */
     .bottom-nav {
@@ -727,20 +824,31 @@
     .bottom-nav button:hover { background: #f1f5f9; box-shadow: none; }
     .bottom-nav button.active { color: var(--primary); background: #eaf2fa; }
 
+
     .footer-links { margin-top: var(--s3); }
     .dev-credit { flex-basis: 100%; text-align: center; font-size: 12px; color: #94a3b8; font-style: italic; }
     .footer-links button, .footer-links a { display: inline-flex; align-items: center; gap: 6px; }
+
 
     @media (max-width: 600px) {
       .container { padding: 12px 12px 96px; }
       .app-updated { flex-basis: 100%; text-align: left; border-radius: 10px; }
       .app-title h1 { font-size: 18px; }
       .bottom-nav.ready { display: flex; }
-      #tabGrid { display: none; }
-      .rotate-hint { display: flex; }
+      /* Week Grid on phones: scrolls sideways, day column stays visible */
+      .grid-wrapper { -webkit-overflow-scrolling: touch; }
+      .grid-table { min-width: 760px; }
+      .grid-table th, .grid-table td { padding: 4px; }
+      .grid-table .grid-day { width: 66px; font-size: 11px; }
+      .grid-table thead th { font-size: 11px; }
+      .grid-entry { padding: 3px 3px; }
+      .grid-entry b { font-size: 11px; }
+      .grid-entry .sub { font-size: 10px; }
+      .swipe-hint { display: block; }
       .toolbar .btn-soft { font-size: 13px; padding: 10px 8px; }
       .menu-list { min-width: 200px; }
       .grid-table th, .grid-table td { font-size: 12px; }
+
 
       /* phones: show 'Now / Next class' first, the pickers right below it */
       .container { display: flex; flex-direction: column; }
@@ -754,10 +862,16 @@
 </head>
 
 
+
+
 <body>
 
 
+
+
 <div class="container">
+
+
 
 
   <header class="app-header">
@@ -771,10 +885,14 @@
   </header>
 
 
+
+
   <div id="updateBanner" class="update-banner">
     <div id="updateBannerText"></div>
     <button onclick="dismissUpdateBanner()">OK</button>
   </div>
+
+
 
 
   <div id="offlineBar" class="offline-bar"></div>
@@ -791,15 +909,21 @@
   </div>
 
 
+
+
   <div id="controls">
 
 
+
+
     <div class="batch-bar">
+
 
       <div class="seg role-toggle" role="tablist" aria-label="View as">
         <button id="roleStudent" class="active" onclick="setRole('student')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Student</button>
         <button id="roleTeacher" onclick="setRole('teacher')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Teacher</button>
       </div>
+
 
       <div id="studentBox" class="select-box">
         <label for="batchFilter">Select Your Batch</label>
@@ -808,6 +932,7 @@
         </select>
       </div>
 
+
       <div id="teacherBox" class="select-box" style="display:none;">
         <label for="teacherFilter">Select a Teacher</label>
         <select id="teacherFilter">
@@ -815,12 +940,14 @@
         </select>
       </div>
 
+
       <div class="view-tabs seg">
         <button id="tabToday" onclick="setView('today')">Today</button>
         <button id="tabTomorrow" onclick="setView('tomorrow')">Tomorrow</button>
         <button id="tabGrid" onclick="setView('grid')">Week Grid</button>
         <button id="tabWeek" onclick="setView('week')">Week List</button>
       </div>
+
 
       <div class="toolbar">
         <button class="btn btn-soft" id="shareTodayBtn" onclick="shareToday()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="shareTodayLabel">Share today's routine</span></button>
@@ -834,10 +961,14 @@
         </details>
       </div>
 
+
     </div>
 
 
+
+
     <button id="conflictBtn" onclick="checkConflicts()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Check Class Overlap</button>
+
 
     <details class="more" id="freeRoomsBox">
       <summary><span class="sum-title"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg> Free rooms right now</span><span id="freeChip" class="chip"></span></summary>
@@ -856,6 +987,8 @@
     </details>
 
 
+
+
     <details class="more">
       <summary><span class="sum-title">More filters</span></summary>
       <div class="filters">
@@ -867,12 +1000,16 @@
         </div>
 
 
+
+
         <div class="filter-group">
           <label for="roomFilter">Room</label>
           <select id="roomFilter">
             <option value="">All Rooms</option>
           </select>
         </div>
+
+
 
 
         <div class="filter-group">
@@ -883,10 +1020,14 @@
         </div>
 
 
+
+
         <div class="filter-group">
           <label for="courseFilter">Course</label>
           <input type="text" id="courseFilter" placeholder="Search course...">
         </div>
+
+
 
 
         <div class="filter-group">
@@ -895,20 +1036,30 @@
         </div>
 
 
+
+
         <div class="button-area">
           <button onclick="resetFilters()">Reset Filters</button>
         </div>
+
+
 
 
       </div>
     </details>
 
 
+
+
   </div>
+
+
 
 
   <div id="infoPanel"></div>
   <div id="resultCount" class="result-count"></div>
+
+
 
 
   <div id="conflictReport" class="conflict-modal">
@@ -922,18 +1073,26 @@
   </div>
 
 
+
+
   <div id="routine"></div>
+
+
 
 
   <div class="footer-links">
     <button onclick="openShare()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Share / QR code</button>
     <a id="feedbackLink" href="#" target="_blank" rel="noopener" style="display:none;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Report a problem</a>
-    <span class="dev-credit">Developed &amp; Maintained by Akib | Version 2.0</span>
+    <span class="dev-credit">Developed &amp; Maintained by Akib | Version 2.1</span>
     <span class="privacy-note">This app counts anonymous visits (batch and date only). No names or personal data are stored.</span>
   </div>
 
 
+
+
 </div>
+
+
 
 
 <nav class="bottom-nav" id="bottomNav" aria-label="Quick navigation">
@@ -943,7 +1102,10 @@
   <button id="navRooms" onclick="navGo('rooms')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg><span>Rooms</span></button>
 </nav>
 
+
 <script>
+
+
 
 
   /* ---------- State ---------- */
@@ -955,9 +1117,13 @@
   window.batchConflicts = [];
 
 
+
+
   var LS_BATCH = "routine_batch";
   var LS_SEEN = "routine_seen_modified";
   var DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+
 
 
   /* ---------- Settings you can edit ---------- */
@@ -973,6 +1139,8 @@
   var roomMap = {};
 
 
+
+
   /* ---------- Small helpers ---------- */
   function esc(value) {
     return String(value === undefined || value === null ? "" : value)
@@ -984,9 +1152,13 @@
   }
 
 
+
+
   function lsGet(key) {
     try { return localStorage.getItem(key); } catch (e) { return null; }
   }
+
+
 
 
   function lsSet(key, value) {
@@ -1000,9 +1172,13 @@
   }
 
 
+
+
   function val(id) {
     return document.getElementById(id).value;
   }
+
+
 
 
   function dhakaNow() {
@@ -1015,8 +1191,12 @@
     }).formatToParts(new Date());
 
 
+
+
     var o = {};
     parts.forEach(function (p) { o[p.type] = p.value; });
+
+
 
 
     return {
@@ -1027,11 +1207,15 @@
   }
 
 
+
+
   function addDays(dayName, n) {
     var i = DAYS.indexOf(dayName);
     if (i < 0) return dayName;
     return DAYS[(i + n) % 7];
   }
+
+
 
 
   function toMinutes(t) {
@@ -1047,9 +1231,13 @@
   }
 
 
+
+
   function isLabRow(row) {
     return String(row["Room Type"] || "").toLowerCase().indexOf("lab") !== -1;
   }
+
+
 
 
   /* Lab sections: .1/.2 -> A, .3/.4 -> B. Theory: batch itself. */
@@ -1058,12 +1246,18 @@
     if (!isLabRow(row)) return batch;
 
 
+
+
     var m = String(row["Course"] || "").match(/\.(\d+)$/);
     if (!m) return batch;
 
 
+
+
     var num = batch.replace(/[A-Z]$/, "");
     var s = Number(m[1]);
+
+
 
 
     if (s === 1 || s === 2) return num + "A";
@@ -1072,14 +1266,20 @@
   }
 
 
+
+
   function classType(row) {
     return isLabRow(row) ? "Lab" : "Theory";
   }
 
 
+
+
   function timeText(row) {
     return String(row["Start Time"] || "") + " - " + String(row["End Time"] || "");
   }
+
+
 
 
   function findHeader(possibleNames) {
@@ -1093,12 +1293,16 @@
   }
 
 
+
+
   function getUniqueValues(header) {
     var values = allRows
       .map(function (row) { return String(row[header] || "").trim(); })
       .filter(function (v) { return v !== ""; });
     return Array.from(new Set(values)).sort();
   }
+
+
 
 
   function populateSelect(select, values) {
@@ -1112,8 +1316,12 @@
   }
 
 
+
+
   /* ---------- Load ---------- */
   /* (the routine is loaded by loadRoutine(), called at the end of this script) */
+
+
 
 
   /* Fresh data from the server */
@@ -1127,6 +1335,7 @@
     logUsage();
   }
 
+
   /* Draws the page from data (fresh, or the saved offline copy) */
   function applyData(data, fromCache) {
     document.getElementById("status").style.display = "none";
@@ -1134,10 +1343,12 @@
     renderMeta();
     notices = (data && data.notices) || [];
 
+
     facultyMap = {};
     roomMap = {};
     (data.faculty || []).forEach(function (f) { facultyMap[String(f["Faculty Code"]).trim()] = f; });
     (data.rooms || []).forEach(function (r) { roomMap[String(r["Room No"]).trim()] = r; });
+
 
     if (FEEDBACK_URL) {
       var fb = document.getElementById("feedbackLink");
@@ -1145,11 +1356,13 @@
       fb.style.display = "inline-block";
     }
 
+
     if (!data.rows || data.rows.length === 0) {
       document.getElementById("routine").innerHTML =
         "<div class='no-data'>No routine data found.</div>";
       return;
     }
+
 
     var keepIds = ["dayFilter", "roomFilter", "facultyFilter", "batchFilter", "teacherFilter"];
     var prev = null;
@@ -1157,6 +1370,7 @@
       prev = { view: view };
       keepIds.forEach(function (id) { prev[id] = val(id); });
     }
+
 
     allRows = data.rows;
     allRows.forEach(function (row) {
@@ -1166,11 +1380,14 @@
     headers = Object.keys(allRows[0]);
     computeBoundaries();
 
+
     createFilters();
+
 
     function hasOpt(sel, v) {
       return !!v && Array.prototype.some.call(sel.options, function (o) { return o.value === v; });
     }
+
 
     if (prev) {
       keepIds.forEach(function (id) {
@@ -1189,6 +1406,7 @@
       }
     }
 
+
     applied = true;
     document.getElementById("controls").style.display = "block";
     setRole(val("teacherFilter") ? "teacher" : (prev ? role : "student"), true);
@@ -1199,11 +1417,13 @@
     startLive();
   }
 
+
   function showError(error) {
     document.getElementById("status").style.display = "block";
     document.getElementById("status").innerHTML =
       "<span class='error'>Error: " + esc(error && error.message ? error.message : error) + "</span>";
   }
+
 
   function renderMeta() {
     if (meta.semester) document.getElementById("metaSemester").textContent = meta.semester;
@@ -1215,13 +1435,19 @@
   }
 
 
+
+
   /* ---------- Update banner ---------- */
   function checkUpdateBanner() {
     var current = meta.lastModified;
     if (!current) return;
 
 
+
+
     var seen = lsGet(LS_SEEN);
+
+
 
 
     if (seen && seen !== current) {
@@ -1234,10 +1460,14 @@
   }
 
 
+
+
   function dismissUpdateBanner() {
     lsSet(LS_SEEN, meta.lastModified);
     document.getElementById("updateBanner").style.display = "none";
   }
+
+
 
 
   /* ---------- Admin only: ?admin=1 ---------- */
@@ -1250,11 +1480,15 @@
   }
 
 
+
+
   /* ---------- Filters ---------- */
   function createFilters() {
     var dayHeader = findHeader(["Day"]);
     var roomHeader = findHeader(["Room"]);
     var facultyHeader = findHeader(["Faculty Name", "Faculty"]);
+
+
 
 
     if (dayHeader) {
@@ -1267,13 +1501,18 @@
     if (facultyHeader) populateSelect(document.getElementById("facultyFilter"), getUniqueValues(facultyHeader));
 
 
+
+
     populateSelect(document.getElementById("batchFilter"), getUniqueValues("Group"));
     populateTeacherSelect();
+
+
 
 
     if (filtersBound) return;
     filtersBound = true;
     bindExtras();
+
 
     document.getElementById("batchFilter").addEventListener("change", function () {
       var b = val("batchFilter");
@@ -1287,11 +1526,15 @@
     });
 
 
+
+
     document.getElementById("dayFilter").addEventListener("change", function () {
       view = "week";
       updateTabs();
       applyFilters();
     });
+
+
 
 
     ["roomFilter", "facultyFilter"].forEach(function (id) {
@@ -1303,12 +1546,16 @@
   }
 
 
+
+
   function setView(v) {
     view = v;
     if (v !== "week") document.getElementById("dayFilter").value = "";
     updateTabs();
     applyFilters();
   }
+
+
 
 
   function updateTabs() {
@@ -1322,6 +1569,8 @@
   }
 
 
+
+
   function getEffectiveDay() {
     if (view === "today") return dhakaNow().day;
     if (view === "tomorrow") return addDays(dhakaNow().day, 1);
@@ -1329,8 +1578,9 @@
   }
 
 
+
+
   function applyFilters() {
-    if (view === "grid" && isPhone()) { view = "week"; updateTabs(); }
     var selectedDay = getEffectiveDay().toLowerCase();
     var selectedRoom = val("roomFilter").toLowerCase();
     var selectedBatch = val("batchFilter").toLowerCase();
@@ -1340,8 +1590,12 @@
     var generalSearch = val("generalFilter").trim().toLowerCase();
 
 
+
+
     var facultyHeader = findHeader(["Faculty Name", "Faculty"]);
     var courseHeader = findHeader(["Course", "Course Code"]);
+
+
 
 
     var rows = allRows.filter(function (row) {
@@ -1351,12 +1605,18 @@
       if (teacher && !rowHasFaculty(row, teacher)) return false;
 
 
+
+
       if (facultySearch && facultyHeader &&
           String(row[facultyHeader] || "").toLowerCase().indexOf(facultySearch) === -1) return false;
 
 
+
+
       if (courseSearch && courseHeader &&
           String(row[courseHeader] || "").toLowerCase().indexOf(courseSearch) === -1) return false;
+
+
 
 
       if (generalSearch) {
@@ -1369,6 +1629,8 @@
     });
 
 
+
+
     rows.sort(function (a, b) {
       var da = DAYS.indexOf(a["Day"]), db = DAYS.indexOf(b["Day"]);
       if (da !== db) return da - db;
@@ -1378,6 +1640,8 @@
     });
 
 
+
+
     visibleRows = rows;
     renderNoticeBanner();
     updateFreeChip();
@@ -1385,6 +1649,8 @@
     if (view === "grid") renderGrid(rows);
     else renderTable(rows);
   }
+
+
 
 
   function resetFilters() {
@@ -1398,6 +1664,8 @@
   }
 
 
+
+
   /* ---------- Now / Next ---------- */
   function mergeSessions(rows) {
     var out = [];
@@ -1405,6 +1673,8 @@
       var s = toMinutes(r["Start Time"]);
       var e = toMinutes(r["End Time"]);
       var last = out[out.length - 1];
+
+
 
 
       if (last && last.course === r["Course"] && last.room === r["Room"] &&
@@ -1424,15 +1694,19 @@
   }
 
 
+
+
   function sessionHtml(kind, label, s) {
     var cancelled = hasCancel(s.notices);
     var cd = "";
+
 
     if (!cancelled && kind === "now") {
       cd = "<div class='countdown' data-mode='end' data-end='" + s.end + "'></div>";
     } else if (!cancelled && kind === "next") {
       cd = "<div class='countdown' data-mode='start' data-start='" + s.start + "' data-offset='" + (s.offset || 0) + "'></div>";
     }
+
 
     return "<div class='info-card " + kind + "'>" +
       "<div class='label'>" + esc(label) + "</div>" +
@@ -1443,6 +1717,8 @@
       noticeLinesHtml(s.notices) + cd +
       "</div>";
   }
+
+
 
 
   function findNextClass(group, fromDayOffset) {
@@ -1464,6 +1740,8 @@
   }
 
 
+
+
   function dayLabel(offset, day) {
     if (offset === 0) return "Today";
     if (offset === 1) return "Tomorrow (" + day + ")";
@@ -1471,9 +1749,12 @@
   }
 
 
+
+
   function startSort(a, b) {
     return (toMinutes(a["Start Time"]) || 0) - (toMinutes(b["Start Time"]) || 0);
   }
+
 
   /* next class that is NOT cancelled, looking ahead up to 7 days */
   function findNextFor(pred, fromOffset) {
@@ -1495,11 +1776,13 @@
     return null;
   }
 
+
   function renderInfoPanel(rows) {
     var panel = document.getElementById("infoPanel");
     var teacher = val("teacherFilter");
     var batch = val("batchFilter");
     var html = "";
+
 
     if (teacher) {
       panel.innerHTML = teacherPanelHtml(teacher);
@@ -1507,18 +1790,22 @@
       return;
     }
 
+
     if (!batch) {
       html = selectHintHtml();
       panel.innerHTML = html;
       return;
     }
 
+
     var batchPred = function (r) { return String(r["Group"]).toLowerCase() === batch.toLowerCase(); };
+
 
     if (view === "today") {
       var now = dhakaNow();
       var sessions = mergeSessions(rows);
       var current = null, upcoming = null, cancelled = [];
+
 
       sessions.forEach(function (s) {
         if (hasCancel(s.notices)) {
@@ -1529,9 +1816,11 @@
         if (s.start > now.minutes && !upcoming) upcoming = s;
       });
 
+
       cancelled.forEach(function (c) { html += sessionHtml("cancelled", "Class cancelled today", c); });
       if (current) html += sessionHtml("now", "Happening now", current);
       if (upcoming) html += sessionHtml("next", "Next class", upcoming);
+
 
       if (!current && !upcoming) {
         if (rows.length === 0) {
@@ -1550,9 +1839,12 @@
       if (nxt2) html += sessionHtml("next", "Next class: " + dayLabel(nxt2.offset, nxt2.day), nxt2);
     }
 
+
     panel.innerHTML = html;
     tickCountdowns();
   }
+
+
 
 
   function computeStatuses(rows) {
@@ -1560,14 +1852,20 @@
     if (view !== "today" || !(val("batchFilter") || val("teacherFilter"))) return statuses;
 
 
+
+
     var now = dhakaNow().minutes;
     var nextStart = null;
+
+
 
 
     rows.forEach(function (r) {
       var s = toMinutes(r["Start Time"]);
       if (s !== null && s > now && (nextStart === null || s < nextStart)) nextStart = s;
     });
+
+
 
 
     rows.forEach(function (r, i) {
@@ -1580,8 +1878,12 @@
     });
 
 
+
+
     return statuses;
   }
+
+
 
 
   /* ---------- Render ---------- */
@@ -1589,14 +1891,20 @@
     var displayColumns = ["Day", "Time", "Faculty Code", "Room", "Course", "Group", "Class Type"];
 
 
+
+
     var label = view === "today" ? "Today (" + dhakaNow().day + ")" :
                 view === "tomorrow" ? "Tomorrow (" + addDays(dhakaNow().day, 1) + ")" : "Full week";
     var batch = val("batchFilter");
 
 
+
+
     document.getElementById("resultCount").innerHTML =
       esc(label) + subjectLabelHtml() +
       " &middot; Showing " + rows.length + " of " + allRows.length + " classes";
+
+
 
 
     if (!rows || rows.length === 0) {
@@ -1606,13 +1914,19 @@
     }
 
 
+
+
     var statuses = computeStatuses(rows);
     var mobileHtml = "";
     var html = "<div class='table-wrapper'><table><thead><tr>";
 
 
+
+
     displayColumns.forEach(function (h) { html += "<th>" + esc(h) + "</th>"; });
     html += "</tr></thead><tbody>";
+
+
 
 
     rows.forEach(function (row, i) {
@@ -1621,6 +1935,8 @@
       var rowClass = String(row["Day"] || "").toLowerCase() + (st ? " row-" + st : "") + (hasCancel(nts) ? " row-cancelled" : "");
       var badge = st === "now" ? "<span class='badge now'>Now</span>" :
                   st === "next" ? "<span class='badge next'>Next</span>" : "";
+
+
 
 
       var showDay = view === "week";
@@ -1635,7 +1951,11 @@
         "</div>";
 
 
+
+
       html += "<tr class='" + rowClass + "' onclick='showClassDetails(" + i + ")' style='cursor:pointer;'>";
+
+
 
 
       displayColumns.forEach(function (h) {
@@ -1648,18 +1968,26 @@
         else value = row[h] || "";
 
 
+
+
         html += "<td>" + esc(value) + extra + "</td>";
       });
+
+
 
 
       html += "</tr>";
     });
 
 
+
+
     html += "</tbody></table></div>";
-    var hint = view === "week" ? "<div class='rotate-hint'>" + ico("rotate") + " Tip: rotate your phone to see the weekly grid.</div>" : "";
+    var hint = "";
     document.getElementById("routine").innerHTML = hint + html + mobileHtml;
   }
+
+
 
 
   /* ---------- Weekly grid ---------- */
@@ -1677,11 +2005,15 @@
   }
 
 
+
+
   function getGridDays() {
     var present = {};
     allRows.forEach(function (r) { present[r["Day"]] = true; });
     return DAYS.filter(function (d) { return present[d]; });
   }
+
+
 
 
   function gridSig(entries) {
@@ -1691,10 +2023,14 @@
   }
 
 
+
+
   function buildGridHtml(rows, interactive) {
     var slots = getSlots();
     var days = getGridDays();
     var map = {};
+
+
 
 
     rows.forEach(function (r, i) {
@@ -1704,9 +2040,13 @@
     });
 
 
+
+
     var today = dhakaNow().day;
     var teacherGrid = !!val("teacherFilter");
     var html = "<table class='grid-table'><thead><tr><th class='grid-day'>Day</th>";
+
+
 
 
     slots.forEach(function (s) {
@@ -1715,15 +2055,21 @@
     html += "</tr></thead><tbody>";
 
 
+
+
     days.forEach(function (day) {
       var isToday = interactive && day === today;
       html += "<tr class='" + (isToday ? "grid-today-row" : "") + "'><th class='grid-day" + (isToday ? " today" : "") + "'>" +
         esc(day) + (isToday ? "<span class='today-tag'>TODAY</span>" : "") + "</th>";
 
 
+
+
       var i = 0;
       while (i < slots.length) {
         var entries = map[day + "|" + slots[i].start] || [];
+
+
 
 
         if (!entries.length) {
@@ -1733,12 +2079,16 @@
         }
 
 
+
+
         var sig = gridSig(entries);
         var span = 1;
         while (i + span < slots.length &&
                gridSig(map[day + "|" + slots[i + span].start] || []) === sig) {
           span++;
         }
+
+
 
 
         html += "<td colspan='" + span + "' class='grid-cell'>";
@@ -1757,8 +2107,12 @@
       }
 
 
+
+
       html += "</tr>";
     });
+
+
 
 
     html += "</tbody></table>";
@@ -1766,13 +2120,19 @@
   }
 
 
+
+
   function renderGrid(rows) {
     var batch = val("batchFilter");
     var routine = document.getElementById("routine");
 
 
+
+
     document.getElementById("resultCount").innerHTML =
       "Weekly grid" + subjectLabelHtml() + " &middot; " + rows.length + " classes";
+
+
 
 
     if (!batch && !val("teacherFilter")) {
@@ -1785,8 +2145,12 @@
     }
 
 
-    routine.innerHTML = legendHtml() + "<div class='grid-wrapper'>" + buildGridHtml(rows, true) + "</div>";
+
+
+    routine.innerHTML = legendHtml() + "<div class='swipe-hint'>↔ Swipe sideways to see all time slots</div><div class='grid-wrapper'>" + buildGridHtml(rows, true) + "</div>";
   }
+
+
 
 
   /* ---------- Class details ---------- */
@@ -1794,6 +2158,8 @@
     var r = roomMap[String(room || "").trim()];
     return r ? String(r["Room Name / Lab"] || "").trim() : "";
   }
+
+
 
 
   function facultyInfo(row) {
@@ -1806,6 +2172,8 @@
   }
 
 
+
+
   function detailRow(label, htmlValue) {
     if (!htmlValue) return "";
     return "<div style='padding:10px 0;border-bottom:1px solid #eee;'>" +
@@ -1814,17 +2182,25 @@
   }
 
 
+
+
   function showClassDetails(index) {
     var row = visibleRows[index];
     if (!row) return;
+
+
 
 
     var existing = document.getElementById("classDetailsModal");
     if (existing) existing.remove();
 
 
+
+
     var f = facultyInfo(row);
     var rn = roomName(row["Room"]);
+
+
 
 
     var modal = document.createElement("div");
@@ -1832,6 +2208,8 @@
     modal.style.cssText =
       "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);" +
       "display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box;";
+
+
 
 
     var content =
@@ -1844,6 +2222,8 @@
       "width:36px;height:36px;font-size:20px;cursor:pointer;flex-shrink:0;'>×</button></div>";
 
 
+
+
     content += detailRow("Room", esc("Room " + row["Room"]) + (rn ? " &mdash; " + esc(rn) : ""));
     content += detailRow("Faculty", esc(f.name) + (f.designation ? "<br><span style='font-size:14px;color:#555;'>" + esc(f.designation) + "</span>" : ""));
     content += detailRow("Faculty Type", esc(f.type));
@@ -1852,9 +2232,13 @@
     content += noticeDetailHtml(row);
 
 
+
+
     content +=
       "<button onclick='closeClassDetails()' style='margin-top:18px;width:100%;padding:12px;" +
       "background:#1f4e79;color:white;border:0;border-radius:6px;font-size:16px;cursor:pointer;'>Close</button></div>";
+
+
 
 
     modal.innerHTML = content;
@@ -1865,10 +2249,14 @@
   }
 
 
+
+
   function closeClassDetails() {
     var modal = document.getElementById("classDetailsModal");
     if (modal) modal.remove();
   }
+
+
 
 
   /* ---------- JPG download ---------- */
@@ -1882,6 +2270,8 @@
     }
 
 
+
+
     var rows = allRows.filter(function (r) {
       return String(r["Group"]).toLowerCase() === batch.toLowerCase();
     });
@@ -1891,14 +2281,20 @@
     }
 
 
+
+
     rows.sort(function (a, b) {
       return toMinutes(a["Start Time"]) - toMinutes(b["Start Time"]);
     });
 
 
+
+
     var printArea = document.createElement("div");
     printArea.style.cssText =
       "background:white;padding:20px;width:1300px;font-family:Arial;position:absolute;left:-10000px;top:0;";
+
+
 
 
     printArea.innerHTML =
@@ -1911,7 +2307,11 @@
       buildGridHtml(rows, false);
 
 
+
+
     document.body.appendChild(printArea);
+
+
 
 
     html2canvas(printArea, { scale: 2, backgroundColor: "#ffffff" }).then(function (canvas) {
@@ -1929,13 +2329,19 @@
   }
 
 
+
+
   /* ---------- Calendar export (.ics) ---------- */
   var WEEKDAY_INDEX = { Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5, Saturday: 6 };
   var MONTH_NAMES = ["january", "february", "march", "april", "may", "june", "july",
                      "august", "september", "october", "november", "december"];
 
 
+
+
   function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+
 
 
   function parseDateText(text) {
@@ -1945,6 +2351,8 @@
     if (mi < 0) return null;
     return new Date(Date.UTC(Number(m[3]), mi, Number(m[1])));
   }
+
+
 
 
   function dhakaToday() {
@@ -1957,14 +2365,20 @@
   }
 
 
+
+
   function ymd(d) {
     return d.getUTCFullYear() + pad2(d.getUTCMonth() + 1) + pad2(d.getUTCDate());
   }
 
 
+
+
   function hhmmss(mins) {
     return pad2(Math.floor(mins / 60)) + pad2(mins % 60) + "00";
   }
+
+
 
 
   function icsEscape(text) {
@@ -1974,6 +2388,8 @@
       .replace(/,/g, "\\,")
       .replace(/\r?\n/g, "\\n");
   }
+
+
 
 
   function foldLine(line) {
@@ -1987,6 +2403,8 @@
   }
 
 
+
+
   function downloadText(filename, text, mime) {
     var link = document.createElement("a");
     link.href = "data:" + mime + ";charset=utf-8," + encodeURIComponent(text);
@@ -1997,6 +2415,8 @@
   }
 
 
+
+
   function downloadCalendar() {
     var batch = val("batchFilter");
     if (!batch) {
@@ -2005,15 +2425,21 @@
     }
 
 
+
+
     var today = dhakaToday();
     var start = parseDateText(meta.effectiveFrom);
     if (!start || start.getTime() < today.getTime()) start = today;
+
+
 
 
     var end = parseDateText(meta.semesterEnd);
     var now = new Date();
     var stamp = now.getUTCFullYear() + pad2(now.getUTCMonth() + 1) + pad2(now.getUTCDate()) + "T" +
                 pad2(now.getUTCHours()) + pad2(now.getUTCMinutes()) + pad2(now.getUTCSeconds()) + "Z";
+
+
 
 
     var lines = [
@@ -2036,7 +2462,11 @@
     ];
 
 
+
+
     var count = 0;
+
+
 
 
     DAYS.forEach(function (day) {
@@ -2046,7 +2476,11 @@
       if (!rows.length) return;
 
 
+
+
       rows.sort(function (a, b) { return toMinutes(a["Start Time"]) - toMinutes(b["Start Time"]); });
+
+
 
 
       var first = new Date(start.getTime());
@@ -2055,14 +2489,20 @@
       }
 
 
+
+
       var rrule = "RRULE:FREQ=WEEKLY;COUNT=" + CALENDAR_WEEKS;
       if (end && end.getTime() >= first.getTime()) {
         rrule = "RRULE:FREQ=WEEKLY;UNTIL=" + ymd(end) + "T175959Z";
       }
 
 
+
+
       mergeSessions(rows).forEach(function (s) {
         if (s.start === null || s.end === null) return;
+
+
 
 
         var fac = facultyInfo({ "Faculty Code": s.faculty });
@@ -2070,6 +2510,8 @@
         var desc = "Faculty: " + fac.name + (fac.designation ? " (" + fac.designation + ")" : "") +
                    "\nBatch/Group: " + s.group + "\nType: " + s.type +
                    (rn ? "\nRoom: " + s.room + " - " + rn : "");
+
+
 
 
         lines.push("BEGIN:VEVENT");
@@ -2092,15 +2534,21 @@
     });
 
 
+
+
     if (!count) {
       alert("No classes found for this batch.");
       return;
     }
 
 
+
+
     lines.push("END:VCALENDAR");
     downloadText("Routine_" + batch + ".ics", lines.map(foldLine).join("\r\n") + "\r\n", "text/calendar");
   }
+
+
 
 
   /* ---------- Share / QR ---------- */
@@ -2109,11 +2557,15 @@
     if (existing) existing.remove();
 
 
+
+
     var modal = document.createElement("div");
     modal.id = "shareModal";
     modal.style.cssText =
       "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);" +
       "display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box;";
+
+
 
 
     modal.innerHTML =
@@ -2129,13 +2581,19 @@
       "<button onclick='closeShare()' style='margin-top:8px;background:#6b7280;'>Close</button></div>";
 
 
+
+
     modal.addEventListener("click", function (event) {
       if (event.target === modal) closeShare();
     });
     document.body.appendChild(modal);
 
 
+
+
     if (navigator.share) document.getElementById("nativeShareBtn").style.display = "block";
+
+
 
 
     var box = document.getElementById("qrBox");
@@ -2147,10 +2605,14 @@
   }
 
 
+
+
   function closeShare() {
     var modal = document.getElementById("shareModal");
     if (modal) modal.remove();
   }
+
+
 
 
   function copyShareLink() {
@@ -2159,7 +2621,11 @@
     input.setSelectionRange(0, 99999);
 
 
+
+
     var done = function () { alert("Link copied."); };
+
+
 
 
     try {
@@ -2173,8 +2639,12 @@
     } catch (e) { /* fall through */ }
 
 
+
+
     try { document.execCommand("copy"); done(); } catch (e) { alert("Please copy the link manually."); }
   }
+
+
 
 
   function nativeShare() {
@@ -2185,11 +2655,15 @@
   }
 
 
+
+
   function downloadQrPoster() {
     if (typeof QRCode === "undefined") {
       alert("QR code could not load. Please try again.");
       return;
     }
+
+
 
 
     var tmp = document.createElement("div");
@@ -2201,11 +2675,15 @@
     }
 
 
+
+
     var W = 800, H = 1000;
     var c = document.createElement("canvas");
     c.width = W;
     c.height = H;
     var ctx = c.getContext("2d");
+
+
 
 
     ctx.fillStyle = "#ffffff";
@@ -2223,13 +2701,19 @@
     ctx.fillText(meta.semester || "", W / 2, 275);
 
 
+
+
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(qrCanvas, 150, 320, 500, 500);
+
+
 
 
     ctx.fillStyle = "#555555";
     ctx.font = "28px Arial";
     ctx.fillText("Scan to open on your phone", W / 2, 890);
+
+
 
 
     var link = document.createElement("a");
@@ -2241,10 +2725,14 @@
   }
 
 
+
+
   /* ---------- Overlap check (admin only) ---------- */
   function closeConflictReport() {
     document.getElementById("conflictReport").style.display = "none";
   }
+
+
 
 
   function checkLab(course, room) {
@@ -2252,16 +2740,24 @@
     if (roomNumber.indexOf("7") === 0) return true;
 
 
+
+
     var match = String(course || "").match(/BPH(\d+)/);
     if (match && Number(match[1]) % 2 === 0) return true;
+
+
 
 
     return false;
   }
 
 
+
+
   function checkOverlaps() {
     window.batchConflicts = [];
+
+
 
 
     for (var i = 0; i < allRows.length; i++) {
@@ -2270,16 +2766,24 @@
         var c2 = allRows[j];
 
 
+
+
         var sameDay = String(c1["Day"]).trim() === String(c2["Day"]).trim();
         var sameTime =
           String(c1["Start Time"]).trim().toLowerCase() === String(c2["Start Time"]).trim().toLowerCase() &&
           String(c1["End Time"]).trim().toLowerCase() === String(c2["End Time"]).trim().toLowerCase();
 
 
+
+
         if (!(sameDay && sameTime)) continue;
 
 
+
+
         var time = c1["Start Time"] + " - " + c1["End Time"];
+
+
 
 
         if (c1["Room"] && c1["Room"] === c2["Room"]) {
@@ -2290,8 +2794,12 @@
         }
 
 
+
+
         var lab1 = checkLab(c1["Course"], c1["Room"]);
         var lab2 = checkLab(c2["Course"], c2["Room"]);
+
+
 
 
         if (!lab1 && !lab2 && c1["Group"] && c1["Group"] === c2["Group"] && c1["Course"] !== c2["Course"]) {
@@ -2300,6 +2808,8 @@
             details: c1["Course"] + " & " + c2["Course"] + " (Batch: " + c1["Group"] + ")"
           });
         }
+
+
 
 
         if (c1["Faculty Code"] && c1["Faculty Code"] === c2["Faculty Code"]) {
@@ -2313,8 +2823,12 @@
   }
 
 
+
+
   function checkConflicts() {
     checkOverlaps();
+
+
 
 
     if (!window.batchConflicts || window.batchConflicts.length === 0) {
@@ -2325,14 +2839,20 @@
     }
 
 
+
+
     showConflictReport(window.batchConflicts);
   }
+
+
 
 
   function showConflictReport(conflicts) {
     var report =
       "<h3 style='color:#b00020;margin-top:0;'>⚠️ Class Overlap Report</h3>" +
       "<p>Total conflicts found: " + conflicts.length + "</p>";
+
+
 
 
     conflicts.forEach(function (item, index) {
@@ -2345,9 +2865,14 @@
     });
 
 
+
+
     document.getElementById("conflictContent").innerHTML = report;
     document.getElementById("conflictReport").style.display = "flex";
   }
+
+
+
 
 
 
@@ -2358,10 +2883,12 @@
      5. Free room finder                   8. Anonymous usage count
      ====================================================================== */
 
+
   var LS_CACHE = "routine_offline_copy_v1";
   var LS_LOGGED = "routine_usage_logged";
   var SLOW_MS = 6000;                                    // show the saved copy if Google takes longer than this
   var CAMPUS_HOURS = { start: "08:00", end: "21:00" };   // free-room finder; set to null to turn the check off
+
 
   var applied = false, filtersBound = false, offlineShown = false;
   var slowTimer = null, lastFetchOk = 0;
@@ -2370,7 +2897,11 @@
   var liveStarted = false, lastTickMinute = -1, lastTickDay = "";
 
 
+
+
   function $(id) { return document.getElementById(id); }
+
+
 
 
   /* ---------- Date / time helpers ---------- */
@@ -2381,6 +2912,7 @@
       iso: d.getUTCFullYear() + "-" + pad2(d.getUTCMonth() + 1) + "-" + pad2(d.getUTCDate())
     };
   }
+
 
   /* today's weekday + ISO date for every weekday of the coming 7 days (cached for 1 second) */
   var _wm = { t: 0, v: null };
@@ -2393,10 +2925,12 @@
     return _wm.v;
   }
 
+
   function fmtMin(m) {
     var h = Math.floor(m / 60) % 24, mm = m % 60;
     return (h % 12 || 12) + ":" + pad2(mm) + " " + (h >= 12 ? "PM" : "AM");
   }
+
 
   function fmtDur(mins) {
     mins = Math.max(0, Math.round(mins));
@@ -2407,6 +2941,8 @@
     if (m && !d) out.push(m + " min");
     return out.join(" ");
   }
+
+
 
 
   /* ======================================================================
@@ -2420,6 +2956,7 @@
     return nb === g || nb === b || g.replace(/[a-z]$/, "") === nb;
   }
 
+
   function noticeCourseOk(n, row) {
     var nc = String(n.course || "").trim().toLowerCase();
     if (!nc) return true;
@@ -2427,10 +2964,12 @@
     return rc === nc || rc.indexOf(nc + ".") === 0;
   }
 
+
   /* only notices that name a batch/course (or cancel a whole day) are drawn on individual classes */
   function rowLevelNotice(n) {
     return !!(n.course || n.batch || (n.type === "cancel" && (n.date || n.day)));
   }
+
 
   function noticesForRow(row) {
     if (!notices.length) return [];
@@ -2443,15 +2982,18 @@
     });
   }
 
+
   function hasCancel(list) {
     return !!(list && list.some(function (n) { return n.type === "cancel"; }));
   }
+
 
   function noticeLabel(n) {
     return n.type === "cancel" ? "Cancelled" :
            n.type === "room" ? "Room changed" :
            n.type === "time" ? "Time changed" : "Notice";
   }
+
 
   function noticeText(n) {
     if (n.message) return n.message;
@@ -2460,12 +3002,14 @@
     return "";
   }
 
+
   function noticeBadgesHtml(list) {
     if (!list || !list.length) return "";
     return list.map(function (n) {
       return "<span class='nbadge " + esc(n.type) + "'>" + esc(noticeLabel(n)) + "</span>";
     }).join("");
   }
+
 
   function noticeLinesHtml(list) {
     if (!list || !list.length) return "";
@@ -2474,6 +3018,7 @@
       return txt ? "<div class='notice-line " + esc(n.type) + "'>" + esc(txt) + "</div>" : "";
     }).join("");
   }
+
 
   function noticeDetailHtml(row) {
     var list = noticesForRow(row);
@@ -2486,10 +3031,12 @@
       }).join("") + "</div>";
   }
 
+
   function renderNoticeBanner() {
     var box = $("noticeBanner");
     if (!box) return;
     if (!notices.length) { box.innerHTML = ""; return; }
+
 
     var batch = val("batchFilter"), teacher = val("teacherFilter"), pool = null;
     if (teacher) {
@@ -2497,6 +3044,7 @@
     } else if (batch) {
       pool = allRows.filter(function (r) { return String(r["Group"]).toLowerCase() === batch.toLowerCase(); });
     }
+
 
     var wm = weekMap(), last = dhakaDate(14).iso;
     var list = notices.filter(function (n) {
@@ -2506,11 +3054,15 @@
       return pool.some(function (r) { return noticeBatchOk(n, r) && noticeCourseOk(n, r); });
     });
 
+
     if (!list.length) { box.innerHTML = ""; return; }
+
 
     function isoOf(n) { return n.date || (n.day ? wm.iso[n.day] : "") || ""; }
 
+
     list.sort(function (a, b) { return (isoOf(a) || "0").localeCompare(isoOf(b) || "0"); });
+
 
     var tomorrowIso = dhakaDate(1).iso;
     function whenText(n) {
@@ -2521,6 +3073,7 @@
       return new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB",
         { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
     }
+
 
     var html = "<div class='notice-banner'><div class='nb-title'>" + ico("megaphone") + " Notices</div>";
     list.forEach(function (n) {
@@ -2535,6 +3088,8 @@
   }
 
 
+
+
   /* ======================================================================
      3. TEACHER VIEW
      ====================================================================== */
@@ -2544,14 +3099,17 @@
       .filter(Boolean);
   }
 
+
   function rowHasFaculty(row, code) {
     return facultyTokens(row).indexOf(code) !== -1;
   }
+
 
   function teacherLabel(code) {
     var f = facultyMap[code];
     return f && f["Faculty Name"] ? String(f["Faculty Name"]).trim() : code;
   }
+
 
   function subjectLabelHtml() {
     var teacher = val("teacherFilter"), batch = val("batchFilter");
@@ -2560,9 +3118,11 @@
     return "";
   }
 
+
   function populateTeacherSelect() {
     var sel = $("teacherFilter");
     while (sel.options.length > 1) sel.remove(1);
+
 
     var seen = {}, list = [];
     allRows.forEach(function (r) {
@@ -2574,6 +3134,7 @@
       });
     });
 
+
     list.sort(function (a, b) { return a.label.localeCompare(b.label); });
     list.forEach(function (x) {
       var o = document.createElement("option");
@@ -2583,13 +3144,16 @@
     });
   }
 
+
   /* "Where is Sir right now?" */
   function teacherPanelHtml(code) {
     var now = dhakaNow(), name = teacherLabel(code);
     var pred = function (r) { return rowHasFaculty(r, code); };
 
+
     var rows = allRows.filter(function (r) { return r["Day"] === now.day && pred(r); });
     rows.sort(startSort);
+
 
     var current = null, upcoming = null;
     mergeSessions(rows).forEach(function (s) {
@@ -2597,6 +3161,7 @@
       if (s.start <= now.minutes && now.minutes < s.end && !current) current = s;
       if (s.start > now.minutes && !upcoming) upcoming = s;
     });
+
 
     var html = "";
     if (current) {
@@ -2616,6 +3181,7 @@
     return html;
   }
 
+
   function downloadTeacherJPG(code) {
     var rows = allRows.filter(function (r) { return rowHasFaculty(r, code); });
     if (!rows.length) {
@@ -2624,9 +3190,11 @@
     }
     rows.sort(startSort);
 
+
     var printArea = document.createElement("div");
     printArea.style.cssText =
       "background:white;padding:20px;width:1300px;font-family:Arial;position:absolute;left:-10000px;top:0;";
+
 
     printArea.innerHTML =
       "<div style='text-align:center;margin-bottom:14px;'>" +
@@ -2637,7 +3205,9 @@
       (meta.lastModified ? " | Last updated: " + esc(meta.lastModified) : "") + "</div></div>" +
       buildGridHtml(rows, false);
 
+
     document.body.appendChild(printArea);
+
 
     html2canvas(printArea, { scale: 2, backgroundColor: "#ffffff" }).then(function (canvas) {
       var link = document.createElement("a");
@@ -2654,6 +3224,8 @@
   }
 
 
+
+
   /* ======================================================================
      4. COUNTDOWN + SHARE TODAY'S ROUTINE
      ====================================================================== */
@@ -2661,8 +3233,10 @@
     var els = document.querySelectorAll(".countdown");
     if (!els.length) return;
 
+
     var n = dhakaNow();
     var nowSec = n.minutes * 60 + n.seconds;
+
 
     Array.prototype.forEach.call(els, function (el) {
       var mode = el.getAttribute("data-mode");
@@ -2678,6 +3252,7 @@
     });
   }
 
+
   function computeBoundaries() {
     boundaryMinutes = {};
     allRows.forEach(function (r) {
@@ -2687,26 +3262,31 @@
     });
   }
 
+
   /* ticks every second; redraws the page only when a class starts/ends or the day changes */
   function startLive() {
     if (liveStarted) return;
     liveStarted = true;
+
 
     setInterval(function () {
       tickCountdowns();
       var n = dhakaNow();
       if (n.minutes === lastTickMinute) return;
 
+
       var first = lastTickMinute === -1;
       lastTickMinute = n.minutes;
       var dayChanged = !!lastTickDay && lastTickDay !== n.day;
       lastTickDay = n.day;
+
 
       if (!first && allRows.length && (boundaryMinutes[n.minutes] || dayChanged)) applyFilters();
       updateFreeChip();
       if ($("freeRoomsBox") && $("freeRoomsBox").open) renderFreeRooms();
     }, 1000);
   }
+
 
   function copyText(text, doneMsg) {
     var fallback = function () {
@@ -2726,6 +3306,7 @@
     fallback();
   }
 
+
   function shareToday() {
     var teacher = val("teacherFilter"), batch = val("batchFilter");
     if (!teacher && !batch) {
@@ -2733,11 +3314,13 @@
       return;
     }
 
+
     var off = view === "tomorrow" ? 1 : 0;
     var dayName = addDays(dhakaNow().day, off);
     var d = dhakaDate(off);
     var dateText = d.date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
     var subject = teacher ? teacherLabel(teacher) : "Batch " + batch;
+
 
     var rows = allRows.filter(function (r) {
       if (r["Day"] !== dayName) return false;
@@ -2745,13 +3328,16 @@
     });
     rows.sort(startSort);
 
+
     var lines = [];
     lines.push("📅 *" + (off ? "Tomorrow's" : "Today's") + " class routine*");
     lines.push(dayName + ", " + dateText + " — " + subject);
     lines.push("Southeast University · Dept. of Pharmacy");
     lines.push("");
 
+
     var sessions = mergeSessions(rows);
+
 
     // general notices for that date (not tied to a class)
     var iso = d.iso;
@@ -2761,6 +3347,7 @@
       if (n.day && n.day !== dayName) return;
       if (noticeText(n)) lines.push("📢 " + noticeText(n));
     });
+
 
     if (!sessions.length) {
       lines.push("No class " + (off ? "tomorrow" : "today") + " 🎉");
@@ -2777,14 +3364,18 @@
       });
     }
 
+
     lines.push("");
     lines.push("Full routine: " + APP_URL);
+
 
     var text = lines.join("\n");
     var w = null;
     try { w = window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank"); } catch (e) { w = null; }
     if (!w) copyText(text, "Text copied. Paste it into your WhatsApp group.");
   }
+
+
 
 
   /* ======================================================================
@@ -2797,6 +3388,7 @@
     return m ? m[2] : "";
   }
 
+
   /* today's real room usage: cancelled classes free their room, room changes move it */
   function roomsInUseToday() {
     var today = weekMap().today, out = [];
@@ -2805,8 +3397,10 @@
       var s = toMinutes(r["Start Time"]), e = toMinutes(r["End Time"]);
       if (s === null || e === null) return;
 
+
       var nts = noticesForRow(r);
       if (hasCancel(nts)) return;
+
 
       var room = String(r["Room"] || "").trim();
       nts.forEach(function (n) { var nr = newRoomOf(n); if (nr) room = nr; });
@@ -2814,6 +3408,7 @@
     });
     return out;
   }
+
 
   function allRoomNames() {
     var set = {};
@@ -2825,17 +3420,21 @@
     return Object.keys(set).sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
   }
 
+
   function isLabRoom(room) {
     var byRow = allRows.some(function (r) { return String(r["Room"] || "").trim() === room && isLabRow(r); });
     return byRow || roomName(room).toLowerCase().indexOf("lab") !== -1;
   }
 
+
   function computeFreeRooms(minFree) {
     if (!allRows.length) return { ready: false };
+
 
     var now = dhakaNow();
     var open = CAMPUS_HOURS ? toMinutes(CAMPUS_HOURS.start) : 0;
     var close = CAMPUS_HOURS ? toMinutes(CAMPUS_HOURS.end) : 1440;
+
 
     if (now.minutes < open) {
       return { ready: true, closed: true, chip: "Opens " + fmtMin(open),
@@ -2846,26 +3445,34 @@
                msg: "Campus is closed for today. It opens again at " + fmtMin(open) + "." };
     }
 
+
     var busy = roomsInUseToday(), free = [];
+
 
     allRoomNames().forEach(function (room) {
       var key = room.toLowerCase();
       var iv = busy.filter(function (b) { return b.room.toLowerCase() === key; });
 
+
       var inUse = iv.some(function (b) { return b.s <= now.minutes && now.minutes < b.e; });
       if (inUse) return;
+
 
       var next = null;
       iv.forEach(function (b) { if (b.s > now.minutes && (next === null || b.s < next)) next = b.s; });
 
+
       var until = Math.min(next === null ? close : next, close);
       if (until - now.minutes < minFree) return;
+
 
       free.push({ room: room, until: until, rest: next === null, lab: isLabRoom(room) });
     });
 
+
     return { ready: true, closed: false, now: now, free: free };
   }
+
 
   /* the little pill on the "Free rooms right now" header (updates while the card is closed) */
   function updateFreeChip() {
@@ -2877,11 +3484,14 @@
     chip.className = "chip" + (r.closed ? "" : " open");
   }
 
+
   function renderFreeRooms() {
     var body = $("freeRoomsBody");
     if (!body) return;
 
+
     var r = computeFreeRooms(Number(val("roomMinFree") || 0));
+
 
     if (!r.ready) {
       body.innerHTML = "<div class='no-data'>Routine is not loaded yet.</div>";
@@ -2892,7 +3502,9 @@
       return;
     }
 
+
     var now = r.now, free = r.free;
+
 
     function card(f) {
       var rn = roomName(f.room);
@@ -2903,6 +3515,7 @@
         "</div></div>";
     }
 
+
     function group(title, list) {
       if (!list.length) return "";
       list.sort(function (a, b) { return (b.until - a.until) || a.room.localeCompare(b.room, undefined, { numeric: true }); });
@@ -2910,8 +3523,10 @@
         list.map(card).join("") + "</div>";
     }
 
+
     var rooms = free.filter(function (f) { return !f.lab; });
     var labs = free.filter(function (f) { return f.lab; });
+
 
     body.innerHTML =
       "<div><b>" + free.length + "</b> free right now (" + fmtMin(now.minutes) + ")</div>" +
@@ -2919,6 +3534,8 @@
         "<div class='no-data' style='margin-top:10px;'>No free room matches right now.</div>") +
       "<div class='free-note'>Based on the routine. Cancelled classes free their room, and room changes from Notices are applied.</div>";
   }
+
+
 
 
   /* ======================================================================
@@ -2930,6 +3547,7 @@
     } catch (e) { /* storage full or not available */ }
   }
 
+
   function readOfflineCopy() {
     try {
       var s = localStorage.getItem(LS_CACHE);
@@ -2938,6 +3556,7 @@
       return c && c.data && c.data.rows && c.data.rows.length ? c : null;
     } catch (e) { return null; }
   }
+
 
   function renderOfflineBar(copy, reason) {
     var bar = $("offlineBar");
@@ -2949,6 +3568,7 @@
       "Slow connection. Showing the saved copy while the latest version loads." :
       "No connection. Showing the saved copy.";
 
+
     bar.innerHTML =
       "<div>" + ico("wifioff") + " <b>Offline copy</b> (last updated " + esc(updated) + ")" + esc(when) + "<br>" +
       esc(text) + " Notices may be out of date.</div>" +
@@ -2956,11 +3576,13 @@
     bar.style.display = "flex";
   }
 
+
   function hideOfflineBar() {
     offlineShown = false;
     var bar = $("offlineBar");
     if (bar) bar.style.display = "none";
   }
+
 
   function showOfflineCopy(copy, reason) {
     if (!offlineShown) applyData(copy.data, true);
@@ -2968,12 +3590,15 @@
     renderOfflineBar(copy, reason);
   }
 
+
   function loadRoutine(silent) {
     var startedAt = Date.now();
     var copy = readOfflineCopy();
 
+
     if (!silent) {
       clearTimeout(slowTimer);
+
 
       // Show the saved routine AT ONCE; the fresh one replaces it a moment later.
       if (copy && !applied) {
@@ -2983,6 +3608,7 @@
           renderOfflineBar(copy, "offline");
         }
       }
+
 
       slowTimer = setTimeout(function () {
         if (lastFetchOk >= startedAt) return;   // fresh data already arrived
@@ -2997,8 +3623,10 @@
       }, SLOW_MS);
     }
 
+
     var ctrl = window.AbortController ? new AbortController() : null;
     var killer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 30000);
+
 
     fetch(API_URL + "?action=data", { cache: "no-store", signal: ctrl ? ctrl.signal : undefined })
       .then(function (r) {
@@ -3024,6 +3652,8 @@
   }
 
 
+
+
   /* ======================================================================
      8. ANONYMOUS USAGE COUNT  (batch + date only)
      ====================================================================== */
@@ -3033,10 +3663,12 @@
       var label = val("teacherFilter") ? "(teacher view)" : val("batchFilter");
       if (!label) return;
 
+
       var today = dhakaDate(0).iso, rec = null;
       try { rec = JSON.parse(lsGet(LS_LOGGED) || "null"); } catch (e) { rec = null; }
       if (!rec || rec.d !== today) rec = { d: today, l: [] };
       if (rec.l.indexOf(label) !== -1) return;           // already counted today on this device
+
 
       fetch(API_URL + "?action=log&b=" + encodeURIComponent(label), { cache: "no-store" })
         .then(function (r) { return r.json(); })
@@ -3049,6 +3681,8 @@
         .catch(function () { /* ignore */ });
     } catch (e) { /* ignore */ }
   }
+
+
 
 
   /* ======================================================================
@@ -3075,8 +3709,10 @@
       logUsage();
     });
 
+
     $("roomMinFree").addEventListener("change", renderFreeRooms);
     $("freeRoomsBox").addEventListener("toggle", function () { if (this.open) renderFreeRooms(); updateNav(); });
+
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden || !allRows.length) return;
@@ -3084,12 +3720,15 @@
       if (Date.now() - lastFetchOk > 300000 && navigator.onLine !== false) loadRoutine(true);
     });
 
+
     window.addEventListener("online", function () { if (offlineShown) loadRoutine(); });
+
 
     document.addEventListener("click", function (e) {
       var m = $("moreMenu");
       if (m && m.open && !m.contains(e.target)) m.open = false;
     });
+
 
     var lastW = window.innerWidth, rt = null;
     window.addEventListener("resize", function () {
@@ -3103,19 +3742,24 @@
   }
 
 
+
+
   /* ======================================================================
      v1.5 design pass helpers
      ====================================================================== */
   var ICONS = {"share":"<circle cx=\"18\" cy=\"5\" r=\"3\"/><circle cx=\"6\" cy=\"12\" r=\"3\"/><circle cx=\"18\" cy=\"19\" r=\"3\"/><line x1=\"8.59\" y1=\"13.51\" x2=\"15.42\" y2=\"17.49\"/><line x1=\"15.41\" y1=\"6.51\" x2=\"8.59\" y2=\"10.49\"/>","download":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/>","calendar":"<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/>","more":"<circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/><circle cx=\"5\" cy=\"12\" r=\"1\"/>","search":"<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>","door":"<path d=\"M13 4h3a2 2 0 0 1 2 2v14\"/><path d=\"M2 20h3\"/><path d=\"M13 20h9\"/><path d=\"M10 12v.01\"/><path d=\"M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z\"/>","megaphone":"<path d=\"m3 11 18-5v12L3 14v-3z\"/><path d=\"M11.6 16.8a3 3 0 1 1-5.8-1.6\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>","play":"<polygon points=\"5 3 19 12 5 21 5 3\"/>","wifioff":"<line x1=\"2\" y1=\"2\" x2=\"22\" y2=\"22\"/><path d=\"M8.5 16.5a5 5 0 0 1 7 0\"/><path d=\"M2 8.82a15 15 0 0 1 4.17-2.65\"/><path d=\"M10.66 5c4.01-.36 8.14.9 11.34 3.76\"/><path d=\"M16.85 11.25a10 10 0 0 1 2.22 1.68\"/><path d=\"M5 13a10 10 0 0 1 5.24-2.76\"/><line x1=\"12\" y1=\"20\" x2=\"12.01\" y2=\"20\"/>","alert":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"16\" x2=\"12.01\" y2=\"16\"/>","refresh":"<path d=\"M21 2v6h-6\"/><path d=\"M3 12a9 9 0 0 1 15-6.7L21 8\"/><path d=\"M3 22v-6h6\"/><path d=\"M21 12a9 9 0 0 1-15 6.7L3 16\"/>","info":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>","chat":"<path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/>","user":"<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>","cap":"<path d=\"M22 10v6M2 10l10-5 10 5-10 5z\"/><path d=\"M6 12v5c3 3 9 3 12 0v-5\"/>","check":"<path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/>","sun":"<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>","grid":"<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/>","rotate":"<polyline points=\"23 4 23 10 17 10\"/><path d=\"M20.49 15a9 9 0 1 1-2.12-9.36L23 10\"/>","bell":"<path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\"/>"};
   var role = "student";
 
+
   function ico(name) {
     return ICONS[name] ? "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'>" + ICONS[name] + "</svg>" : "";
   }
 
+
   function isPhone() {
     return !!(window.matchMedia && window.matchMedia("(max-width: 600px)").matches);
   }
+
 
   function setCd(el, html) {
     if (el._h === html) return;
@@ -3123,10 +3767,12 @@
     el.innerHTML = html;
   }
 
+
   function closeMenu() {
     var m = $("moreMenu");
     if (m) m.open = false;
   }
+
 
   /* Student / Teacher toggle: only one picker is visible at a time */
   function setRole(r, silent) {
@@ -3136,6 +3782,7 @@
     $("studentBox").style.display = r === "student" ? "block" : "none";
     $("teacherBox").style.display = r === "teacher" ? "block" : "none";
     if (silent) { updateNav(); return; }
+
 
     if (r === "teacher") {
       $("batchFilter").value = "";
@@ -3156,6 +3803,7 @@
     logUsage();
   }
 
+
   function selectHintHtml() {
     var t = role === "teacher";
     return "<div class='info-card hint'><div class='main'>" + ico("cap") + " " +
@@ -3166,6 +3814,7 @@
       "</div></div>";
   }
 
+
   function legendHtml() {
     var anyCancel = notices.some(function (n) { return n.type === "cancel"; });
     return "<div class='legend'>" +
@@ -3174,6 +3823,7 @@
       (anyCancel ? "<span><i class='dot cancel'></i>Cancelled</span>" : "") +
       "<span><i class='dot today'></i>Today</span></div>";
   }
+
 
   /* bottom navigation (phones) */
   function updateNav() {
@@ -3184,6 +3834,7 @@
     var rb = $("freeRoomsBox");
     set("navRooms", !!(rb && rb.open));
   }
+
 
   function navGo(where) {
     if (!applied) return;
@@ -3204,10 +3855,13 @@
   }
 
 
+
+
   /* ======================================================================
      PWA: install button + service worker (offline app shell)
      ====================================================================== */
   var installEvent = null;
+
 
   function isStandalone() {
     return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
@@ -3215,6 +3869,7 @@
   function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
   function showInstallItem() { var b = $("installBtn"); if (b) b.style.display = "flex"; }
   function hideInstallItem() { var b = $("installBtn"); if (b) b.style.display = "none"; }
+
 
   function installApp() {
     closeMenu();
@@ -3226,6 +3881,7 @@
     }
   }
 
+
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     installEvent = e;
@@ -3234,6 +3890,7 @@
   window.addEventListener("appinstalled", function () { installEvent = null; hideInstallItem(); });
   if (isIOS() && !isStandalone()) showInstallItem();
 
+
   if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
     window.addEventListener("load", function () {
       navigator.serviceWorker.register("sw.js").catch(function () { /* ignore */ });
@@ -3241,9 +3898,14 @@
   }
 
 
+
+
   loadRoutine();
 
+
 </script>
+
+
 
 
 </body>
