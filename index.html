@@ -891,6 +891,15 @@
 
 
 
+    /* clear selected state: filled blue tab, grey others */
+    .seg { background: #e2e8f0; }
+    .seg button { color: #475569; font-weight: 600; }
+    .seg button.active { background: var(--primary); color: #fff; box-shadow: 0 2px 6px rgba(31,78,120,.35); }
+    .seg button.active .ic { stroke: #fff; }
+    .seg button:hover:not(.active) { background: rgba(255,255,255,.8); }
+    .menu.on > summary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .menu.on > summary::after { content: "\00a0· List"; }
+    .menu-list button.sel { background: #e8f1f9; color: var(--primary); }
     /* ---- 1. toolbar: one main action + a More menu ---- */
     .toolbar { display: flex; gap: var(--s1); margin-top: var(--s2); align-items: stretch; }
     .btn {
@@ -1252,7 +1261,6 @@
         <button id="tabToday" onclick="setView('today')">Today</button>
         <button id="tabExam" onclick="setView('exam')" style="display:none;">Exam</button>
         <button id="tabGrid" onclick="setView('grid')">Grid</button>
-        <button id="tabWeek" onclick="setView('week')">List</button>
       </div>
 
 
@@ -1263,6 +1271,7 @@
         <details class="menu" id="moreMenu">
           <summary class="btn btn-ghost"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg> More</summary>
           <div class="menu-list">
+            <button id="menuListBtn" onclick="closeMenu(); setView('week')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> Full week list</button>
             <button id="installBtn" style="display:none;" onclick="installApp()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Install app</button>
             <button onclick="closeMenu(); downloadRoutineJPG()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save as JPG</button>
             <button onclick="closeMenu(); downloadCalendar()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Add to Calendar</button>
@@ -1895,7 +1904,7 @@
         batchSelect.value = saved;
         view = "today";
       } else {
-        view = "week";
+        view = "grid";
       }
     }
 
@@ -2056,7 +2065,7 @@
       lsSet(LS_BATCH, b);
       document.getElementById("dayFilter").value = "";
       document.getElementById("teacherFilter").value = "";
-      view = view === "exam" ? "exam" : (b ? "today" : "week");
+      view = view === "exam" ? "exam" : (b ? "today" : "grid");
       logUsage();
       updateTabs();
       applyFilters();
@@ -2119,7 +2128,10 @@
       te.style.display = exams.length ? "" : "none";
     }
     document.getElementById("tabGrid").className = view === "grid" ? "active" : "";
-    document.getElementById("tabWeek").className = view === "week" ? "active" : "";
+    var mm = document.getElementById("moreMenu");
+    if (mm) mm.classList.toggle("on", view === "week");
+    var lb = document.getElementById("menuListBtn");
+    if (lb) lb.classList.toggle("sel", view === "week");
     var sl = document.getElementById("shareTodayLabel");
     if (sl) sl.textContent = view === "exam" ? "Share exam routine" : (view === "tomorrow" ? "Share tomorrow's routine" : "Share today's routine");
     updateNav();
@@ -2146,7 +2158,11 @@
 
 
   function applyFilters() {
-    if (view === "exam" && !exams.length) { view = "week"; updateTabs(); }
+    if (view === "exam" && !exams.length) { view = "grid"; updateTabs(); }
+    if (view === "grid" && !val("batchFilter") && !val("teacherFilter") &&
+        (val("dayFilter") || val("roomFilter") || val("facultyFilter") || val("courseFilter").trim() || val("generalFilter").trim())) {
+      view = "week"; updateTabs();
+    }
     var selectedDay = getEffectiveDay().toLowerCase();
     var selectedRoom = val("roomFilter").toLowerCase();
     var selectedBatch = val("batchFilter").toLowerCase();
@@ -2257,7 +2273,7 @@
       .forEach(function (id) { document.getElementById(id).value = ""; });
     lsSet(LS_BATCH, "");
     setRole("student", true);
-    view = "week";
+    view = "grid";
     updateTabs();
     applyFilters();
   }
@@ -5039,7 +5055,7 @@
           bs.value = saved;
           view = "today";
         } else {
-          view = "week";
+          view = "grid";
         }
       }
       if (wasExam && exams.length) view = "exam";
@@ -5153,7 +5169,7 @@
     if (r === "teacher") {
       $("batchFilter").value = "";
       $("dayFilter").value = "";
-      view = $("teacherFilter").value ? "grid" : "week";
+      view = "grid";
     } else {
       $("teacherFilter").value = "";
       var saved = lsGet(LS_BATCH), bs = $("batchFilter");
@@ -5161,7 +5177,7 @@
         bs.value = saved;
         view = "today";
       } else {
-        view = "week";
+        view = "grid";
       }
     }
     if (wasExam && exams.length) view = "exam";
@@ -5638,7 +5654,7 @@
     if (where === "today") {
       setView("today");
     } else if (where === "week") {
-      setView("week");
+      setView("grid");
     } else if (where === "teacher") {
       setRole("teacher");
       window.scrollTo({ top: 0, behavior: "smooth" });
