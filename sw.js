@@ -1,8 +1,10 @@
 /* Service worker: keeps the app itself (page, icons, libraries) available offline.
    The routine DATA is cached by the page itself (localStorage), not here.
    When you change index.html, bump VERSION so phones pick up the new copy. */
-const VERSION = "routine-v6";
+const VERSION = "routine-v7";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
+
+
 
 
 self.addEventListener("install", (event) => {
@@ -10,6 +12,8 @@ self.addEventListener("install", (event) => {
     caches.open(VERSION).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())
   );
 });
+
+
 
 
 self.addEventListener("activate", (event) => {
@@ -21,16 +25,24 @@ self.addEventListener("activate", (event) => {
 });
 
 
+
+
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
 
 
+
+
   const url = new URL(req.url);
+
+
 
 
   // Never touch the Apps Script API (data is handled by the page).
   if (url.hostname.endsWith("script.google.com") || url.hostname.endsWith("googleusercontent.com")) return;
+
+
 
 
   const sameOrigin = url.origin === self.location.origin;
@@ -39,7 +51,11 @@ self.addEventListener("fetch", (event) => {
                   url.hostname === "fonts.gstatic.com";
 
 
+
+
   if (!sameOrigin && !library) return;
+
+
 
 
   // Open from cache at once, refresh it in the background.
@@ -55,3 +71,5 @@ self.addEventListener("fetch", (event) => {
     )
   );
 });
+
+
