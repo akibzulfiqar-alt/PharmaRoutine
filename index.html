@@ -815,6 +815,22 @@
     .mobile-card .mc-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
     .mobile-card .mc-meta span { background: #f1f5f9; border-radius: 999px; padding: 3px 10px; font-size: 12px; color: #334155; }
     .swipe-hint { display: none; font-size: 12px; color: #475569; margin: 0 0 6px; }
+
+    /* Exam routine */
+    .exam-table { min-width: 620px; }
+    .exam-time { font-size: 10px; font-weight: normal; opacity: .9; }
+    .exam-date { text-align: center; }
+    .exam-days { font-size: 10px; font-weight: normal; margin-top: 2px; opacity: .85; }
+    .exam-cell { vertical-align: top; text-align: left; cursor: default; }
+    .exam-entry { background: #eef2ff; border-left: 4px solid #4f46e5; border-radius: 6px; padding: 5px 6px; margin-bottom: 4px; cursor: pointer; line-height: 1.35; }
+    .exam-entry b { font-size: 13px; }
+    .exam-title { font-size: 11px; color: #1e293b; }
+    .exam-entry .sub { font-size: 11px; color: #475569; }
+    .exam-note { font-size: 10px; color: #92400e; margin-top: 2px; }
+    .exam-row.past { opacity: .5; }
+    .exam-row.today .exam-entry, .exam-row.now .exam-entry { background: #dcfce7; border-left-color: #16a34a; }
+    .exam-actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; }
+    .exam-actions .btn { flex: 1; min-width: 150px; }
     .rotate-hint {
       display: none; align-items: center; gap: 8px; font-size: 13px; color: #475569;
       background: #eef5fb; border-radius: 10px; padding: 8px 12px; margin-bottom: var(--s1);
@@ -955,7 +971,7 @@
 
       <div class="view-tabs seg">
         <button id="tabToday" onclick="setView('today')">Today</button>
-        <button id="tabTomorrow" onclick="setView('tomorrow')">Tomorrow</button>
+        <button id="tabExam" onclick="setView('exam')" style="display:none;">Exam</button>
         <button id="tabGrid" onclick="setView('grid')">Week Grid</button>
         <button id="tabWeek" onclick="setView('week')">Week List</button>
       </div>
@@ -1095,7 +1111,7 @@
   <div class="footer-links">
     <button onclick="openShare()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Share / QR code</button>
     <a id="feedbackLink" href="#" target="_blank" rel="noopener" style="display:none;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Report a problem</a>
-    <span class="dev-credit">Developed &amp; Maintained by Akib | Version 2.3</span>
+    <span class="dev-credit">Developed &amp; Maintained by Akib | Version 2.4</span>
     <span class="privacy-note">This app counts anonymous visits (batch and date only). No names or personal data are stored.</span>
   </div>
 
@@ -1354,6 +1370,7 @@
     meta = (data && data.meta) || {};
     renderMeta();
     notices = (data && data.notices) || [];
+    exams = (data && data.exams) || [];
 
 
     facultyMap = {};
@@ -1531,7 +1548,7 @@
       lsSet(LS_BATCH, b);
       document.getElementById("dayFilter").value = "";
       document.getElementById("teacherFilter").value = "";
-      view = b ? "today" : "week";
+      view = view === "exam" ? "exam" : (b ? "today" : "week");
       logUsage();
       updateTabs();
       applyFilters();
@@ -1572,11 +1589,15 @@
 
   function updateTabs() {
     document.getElementById("tabToday").className = view === "today" ? "active" : "";
-    document.getElementById("tabTomorrow").className = view === "tomorrow" ? "active" : "";
+    var te = document.getElementById("tabExam");
+    if (te) {
+      te.className = view === "exam" ? "active" : "";
+      te.style.display = exams.length ? "" : "none";
+    }
     document.getElementById("tabGrid").className = view === "grid" ? "active" : "";
     document.getElementById("tabWeek").className = view === "week" ? "active" : "";
     var sl = document.getElementById("shareTodayLabel");
-    if (sl) sl.textContent = view === "tomorrow" ? "Share tomorrow's routine" : "Share today's routine";
+    if (sl) sl.textContent = view === "exam" ? "Share exam routine" : (view === "tomorrow" ? "Share tomorrow's routine" : "Share today's routine");
     updateNav();
   }
 
@@ -1593,6 +1614,7 @@
 
 
   function applyFilters() {
+    if (view === "exam" && !exams.length) { view = "week"; updateTabs(); }
     var selectedDay = getEffectiveDay().toLowerCase();
     var selectedRoom = val("roomFilter").toLowerCase();
     var selectedBatch = val("batchFilter").toLowerCase();
@@ -1657,6 +1679,7 @@
     visibleRows = rows;
     renderNoticeBanner();
     updateFreeChip();
+    if (view === "exam") { renderExam(); return; }
     renderInfoPanel(rows);
     if (view === "grid") renderGrid(rows);
     else renderTable(rows);
@@ -2273,6 +2296,7 @@
 
   /* ---------- JPG download ---------- */
   function downloadRoutineJPG() {
+    if (view === "exam") { downloadExamJPG(); return; }
     var teacherCode = val("teacherFilter");
     if (teacherCode) { downloadTeacherJPG(teacherCode); return; }
     var batch = val("batchFilter");
@@ -2904,7 +2928,7 @@
 
   var applied = false, filtersBound = false, offlineShown = false;
   var slowTimer = null, lastFetchOk = 0;
-  var notices = [];
+  var notices = [], exams = [];
   var boundaryMinutes = {};
   var liveStarted = false, lastTickMinute = -1, lastTickDay = "";
 
@@ -3320,6 +3344,7 @@
 
 
   function shareToday() {
+    if (view === "exam") { shareExam(); return; }
     var teacher = val("teacherFilter"), batch = val("batchFilter");
     if (!teacher && !batch) {
       alert("Please select your batch (or a teacher) first.");
@@ -3703,6 +3728,7 @@
   function bindExtras() {
     $("teacherFilter").addEventListener("change", function () {
       var t = this.value;
+      var wasExam = view === "exam";
       if (t) {
         $("batchFilter").value = "";
         $("dayFilter").value = "";
@@ -3716,6 +3742,7 @@
           view = "week";
         }
       }
+      if (wasExam && exams.length) view = "exam";
       updateTabs();
       applyFilters();
       logUsage();
@@ -3788,6 +3815,7 @@
 
   /* Student / Teacher toggle: only one picker is visible at a time */
   function setRole(r, silent) {
+    var wasExam = view === "exam";
     role = r;
     $("roleStudent").className = r === "student" ? "active" : "";
     $("roleTeacher").className = r === "teacher" ? "active" : "";
@@ -3810,6 +3838,7 @@
         view = "week";
       }
     }
+    if (wasExam && exams.length) view = "exam";
     updateTabs();
     applyFilters();
     logUsage();
@@ -3845,6 +3874,367 @@
     set("navTeacher", role === "teacher");
     var rb = $("freeRoomsBox");
     set("navRooms", !!(rb && rb.open));
+  }
+
+
+  /* ======================================================================
+     EXAM ROUTINE  (Exam tab: a grid of dates x shifts for the chosen batch or teacher)
+     ====================================================================== */
+  var MONTH_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function codesOf(text) {
+    return String(text || "").split(/[\/,]/).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+
+  function examRole(e, code) {
+    if (codesOf(e.teacher).indexOf(code) !== -1) return "Course teacher";
+    if (codesOf(e.coinv).indexOf(code) !== -1) return "Invigilator";
+    return "";
+  }
+
+  /* The exams that belong to the selected batch (e.g. 48A) or teacher */
+  function examMine() {
+    var teacher = val("teacherFilter");
+    var batch = val("batchFilter").replace(/\s+/g, "").toLowerCase();
+    return exams.filter(function (e) {
+      if (teacher) return examRole(e, teacher) !== "";
+      if (!batch) return false;
+      return String(e.batch).replace(/\s+/g, "").toLowerCase() === batch;
+    });
+  }
+
+  function examDateOf(e) {
+    var m = String(e.date || "").match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) return new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])));
+    return parseDateText(e.date);
+  }
+
+  function examWhen(e) {
+    var d = examDateOf(e);
+    return (d ? d.getTime() : 0) + (toMinutes(e.start) || 0) * 60000;
+  }
+
+  function examShortDate(e) {
+    var d = examDateOf(e);
+    if (!d) return String(e.date || "");
+    return String(e.day || DAY_NAMES_EXAM[d.getUTCDay()]).slice(0, 3) + ", " + d.getUTCDate() + " " + MONTH_SHORT[d.getUTCMonth()];
+  }
+
+  var DAY_NAMES_EXAM = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  /* kind: past | now | today | upcoming */
+  function examStatus(e) {
+    var d = examDateOf(e);
+    if (!d) return { kind: "upcoming", days: 99 };
+
+    var days = Math.round((d.getTime() - dhakaToday().getTime()) / 86400000);
+    if (days < 0) return { kind: "past", days: days };
+    if (days > 0) return { kind: "upcoming", days: days };
+
+    var now = dhakaNow().minutes;
+    var s = toMinutes(e.start), en = toMinutes(e.end);
+    if (en !== null && now >= en) return { kind: "past", days: 0 };
+    if (s !== null && now >= s) return { kind: "now", days: 0 };
+    return { kind: "today", days: 0 };
+  }
+
+  function examDaysText(st) {
+    if (st.kind === "past") return "Done";
+    if (st.kind === "now") return "Happening now";
+    if (st.kind === "today") return "Today";
+    if (st.days === 1) return "Tomorrow";
+    return "in " + st.days + " days";
+  }
+
+  function examShifts() {
+    var seen = {};
+    var out = [];
+    exams.forEach(function (e) {
+      var k = e.shift || (e.start + "-" + e.end);
+      if (seen[k]) return;
+      seen[k] = true;
+      out.push({ key: k, label: e.shift || "Exam", start: e.start, end: e.end });
+    });
+    out.sort(function (a, b) { return (toMinutes(a.start) || 0) - (toMinutes(b.start) || 0); });
+    return out;
+  }
+
+  function examRoomText(e) {
+    return e.room ? "Room " + e.room : "Room to be announced";
+  }
+
+  function examSubjectText() {
+    var teacher = val("teacherFilter"), batch = val("batchFilter");
+    return teacher ? teacherLabel(teacher) : (batch ? "Batch " + batch : "");
+  }
+
+  function examName() {
+    return (exams[0] && exams[0].exam) || "Exam";
+  }
+
+  function examEntryHtml(e, interactive) {
+    var teacher = val("teacherFilter");
+    var sub = examRoomText(e);
+    if (teacher) sub = esc(e.batch) + " &middot; " + esc(examRole(e, teacher)) + "<br>" + esc(sub);
+    else sub = esc(sub);
+
+    return "<div class='exam-entry'" + (interactive ? " onclick='showExamDetails(" + exams.indexOf(e) + ")'" : "") + ">" +
+      "<b>" + esc(e.course) + "</b>" +
+      "<div class='exam-title'>" + esc(e.title) + "</div>" +
+      "<div class='sub'>" + sub + "</div>" +
+      (e.note ? "<div class='exam-note'>" + esc(e.note) + "</div>" : "") +
+      "</div>";
+  }
+
+  function buildExamGridHtml(list, interactive) {
+    var shifts = examShifts();
+    var byDate = {};
+    var dates = [];
+
+    list.forEach(function (e) {
+      if (!byDate[e.date]) { byDate[e.date] = []; dates.push(e.date); }
+      byDate[e.date].push(e);
+    });
+    dates.sort();
+
+    var html = "<table class='grid-table exam-table'><thead><tr><th class='grid-day'>Date</th>";
+    shifts.forEach(function (s) {
+      html += "<th>" + esc(s.label) + "<div class='exam-time'>" + esc(s.start + " - " + s.end) + "</div></th>";
+    });
+    html += "</tr></thead><tbody>";
+
+    dates.forEach(function (dt) {
+      var first = byDate[dt][0];
+      var st = examStatus(first);
+      var now = interactive && (st.kind === "today" || st.kind === "now");
+
+      html += "<tr class='" + (interactive ? "exam-row " + st.kind : "") + "'>" +
+        "<th class='grid-day exam-date" + (now ? " today" : "") + "'>" + esc(examShortDate(first)) +
+        (interactive ? "<div class='exam-days'>" + esc(examDaysText(st)) + "</div>" : "") + "</th>";
+
+      shifts.forEach(function (s) {
+        var cell = byDate[dt].filter(function (e) { return (e.shift || (e.start + "-" + e.end)) === s.key; });
+        html += "<td class='grid-cell exam-cell'>" + cell.map(function (e) { return examEntryHtml(e, interactive); }).join("") + "</td>";
+      });
+      html += "</tr>";
+    });
+
+    return html + "</tbody></table>";
+  }
+
+  function examInfoHtml(list) {
+    var upcoming = list.filter(function (e) { return examStatus(e).kind !== "past"; })
+                       .sort(function (a, b) { return examWhen(a) - examWhen(b); });
+    var teacher = val("teacherFilter");
+    var html = "";
+
+    if (upcoming.length) {
+      var n = upcoming[0];
+      var st = examStatus(n);
+      var kind = st.kind === "now" || st.kind === "today" ? "now" : "next";
+      html += "<div class='info-card " + kind + "'>" +
+        "<div class='label'>" + esc(st.kind === "now" ? "Exam happening now" : "Next exam") + "</div>" +
+        "<div class='main'>" + esc(n.course) + " &middot; " + esc(n.title) + "</div>" +
+        "<div class='sub'>" + esc(examShortDate(n)) + " &middot; " + esc(n.start + " - " + n.end) + " &middot; " + esc(examRoomText(n)) +
+        (teacher ? " &middot; " + esc(examRole(n, teacher)) + " (" + esc(n.batch) + ")" : "") + "</div>" +
+        "<div class='countdown'>" + esc(examDaysText(st)) + "</div></div>";
+    } else {
+      html += "<div class='info-card hint'><div class='main'>All exams are finished 🎉</div></div>";
+    }
+
+    if (!list.some(function (e) { return e.room; })) {
+      html += "<div class='info-card hint'><div class='sub'>Rooms are not announced yet. They will appear here when added.</div></div>";
+    }
+
+    html += "<div class='exam-actions'>" +
+      "<button class='btn btn-soft' onclick='examCalendar()'>📅 Add exams to calendar</button>" +
+      "<button class='btn btn-soft' onclick='shareExam()'>📤 Share exam routine</button></div>";
+    return html;
+  }
+
+  function renderExam() {
+    var routine = $("routine");
+    var panel = $("infoPanel");
+    var teacher = val("teacherFilter"), batch = val("batchFilter");
+    var list = examMine();
+    var subject = examSubjectText();
+
+    $("resultCount").innerHTML = esc(examName()) + " exam routine" + (subject ? " &middot; " + esc(subject) : "") +
+      (subject ? " &middot; " + list.length + (list.length === 1 ? " exam" : " exams") : "");
+
+    if (!teacher && !batch) {
+      panel.innerHTML = "<div class='info-card hint'><div class='main'>👋 Select your batch</div>" +
+        "<div class='sub'>Choose your batch (or a teacher) above to see only your exams.</div></div>";
+      routine.innerHTML = "";
+      return;
+    }
+
+    if (!list.length) {
+      panel.innerHTML = "";
+      routine.innerHTML = "<div class='no-data'>No exam found for this selection.</div>";
+      return;
+    }
+
+    panel.innerHTML = examInfoHtml(list);
+    routine.innerHTML = "<div class='swipe-hint'>↔ Swipe sideways to see all shifts</div>" +
+      "<div class='grid-wrapper'>" + buildExamGridHtml(list, true) + "</div>";
+  }
+
+  /* ---------- exam details ---------- */
+  function codesText(text) {
+    var codes = codesOf(text);
+    return codes.map(function (c) { return esc(teacherLabel(c)) + (teacherLabel(c) === c ? "" : " (" + esc(c) + ")"); }).join("<br>");
+  }
+
+  function examDetailRow(label, htmlValue) {
+    if (!htmlValue) return "";
+    return "<div style='padding:10px 0;border-bottom:1px solid #eee;'>" +
+      "<div style='font-size:13px;color:#666;font-weight:bold;'>" + esc(label) + "</div>" +
+      "<div style='font-size:16px;margin-top:3px;'>" + htmlValue + "</div></div>";
+  }
+
+  function showExamDetails(index) {
+    var e = exams[index];
+    if (!e) return;
+
+    var old = document.getElementById("examDetailsModal");
+    if (old) old.remove();
+
+    var modal = document.createElement("div");
+    modal.id = "examDetailsModal";
+    modal.style.cssText =
+      "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);" +
+      "display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box;";
+
+    modal.innerHTML =
+      "<div style='background:white;width:100%;max-width:600px;max-height:85vh;overflow:auto;border-radius:12px;padding:20px;box-sizing:border-box;'>" +
+      "<div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;'>" +
+      "<div><h2 style='margin:0;color:#1f4e79;'>" + esc(e.course) + "</h2>" +
+      "<div style='color:#555;margin-top:4px;'>" + esc(e.title) + "</div></div>" +
+      "<button onclick='closeExamDetails()' style='border:0;background:#eee;color:#222;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;flex-shrink:0;'>×</button></div>" +
+      examDetailRow("Exam", esc(e.exam)) +
+      examDetailRow("Date", esc(examShortDate(e)) + " &mdash; " + esc(examDaysText(examStatus(e)))) +
+      examDetailRow("Time", esc(e.shift) + " &middot; " + esc(e.start + " - " + e.end)) +
+      examDetailRow("Room", esc(examRoomText(e))) +
+      examDetailRow("Batch", esc(e.batch) + (e.students ? " &middot; " + esc(e.students) + " students" : "")) +
+      examDetailRow("Course teacher", codesText(e.teacher)) +
+      examDetailRow("Co-invigilator", codesText(e.coinv)) +
+      examDetailRow("Note", esc(e.note)) +
+      "<button onclick='closeExamDetails()' style='margin-top:18px;width:100%;padding:12px;background:#1f4e79;color:white;border:0;border-radius:6px;font-size:16px;cursor:pointer;'>Close</button></div>";
+
+    modal.addEventListener("click", function (ev) { if (ev.target === modal) closeExamDetails(); });
+    document.body.appendChild(modal);
+  }
+
+  function closeExamDetails() {
+    var m = document.getElementById("examDetailsModal");
+    if (m) m.remove();
+  }
+
+  /* ---------- share, image, calendar ---------- */
+  function examSorted() {
+    return examMine().sort(function (a, b) { return examWhen(a) - examWhen(b); });
+  }
+
+  function shareExam() {
+    var list = examSorted();
+    if (!list.length) { alert("Please select your batch (or a teacher) first."); return; }
+
+    var teacher = val("teacherFilter");
+    var lines = ["📝 *" + examName() + " exam routine*", examSubjectText() + " — Southeast University · Dept. of Pharmacy", ""];
+
+    list.forEach(function (e, i) {
+      lines.push((i + 1) + ". " + examShortDate(e) + ", " + e.start + " – " + e.end + "\n   " + e.course + " · " + e.title +
+        " · " + examRoomText(e) + (teacher ? " · " + e.batch + " (" + examRole(e, teacher) + ")" : ""));
+    });
+
+    lines.push("");
+    lines.push("Full routine: " + APP_URL);
+
+    var text = lines.join("\n");
+    var w = null;
+    try { w = window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank"); } catch (err) { w = null; }
+    if (!w) copyText(text, "Text copied. Paste it into your WhatsApp group.");
+  }
+
+  function downloadExamJPG() {
+    var list = examSorted();
+    if (!list.length) { alert("Please select your batch (or a teacher) first."); return; }
+
+    var printArea = document.createElement("div");
+    printArea.style.cssText = "background:white;padding:20px;width:1000px;font-family:Arial;position:absolute;left:-10000px;top:0;";
+    printArea.innerHTML =
+      "<div style='text-align:center;margin-bottom:14px;'>" +
+      "<div style='font-size:22px;font-weight:bold;'>Southeast University - Department of Pharmacy</div>" +
+      "<div style='font-size:18px;margin-top:4px;'>" + esc(examName()) + " Exam Routine - " + esc(examSubjectText()) + "</div>" +
+      "<div style='font-size:14px;color:#555;margin-top:4px;'>" + esc(meta.semester || "") + "</div></div>" +
+      buildExamGridHtml(list, false);
+
+    document.body.appendChild(printArea);
+
+    html2canvas(printArea, { scale: 2, backgroundColor: "#ffffff" }).then(function (canvas) {
+      var link = document.createElement("a");
+      link.href = canvas.toDataURL("image/jpeg", 0.95);
+      link.download = "Exam_" + (val("teacherFilter") || val("batchFilter")).replace(/[^A-Za-z0-9]/g, "") + ".jpg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      printArea.remove();
+    }).catch(function () {
+      printArea.remove();
+      alert("Could not create the image. Please try again.");
+    });
+  }
+
+  function buildExamIcs() {
+    var list = examSorted();
+    if (!list.length) return null;
+
+    var teacher = val("teacherFilter");
+    var now = new Date();
+    var stamp = now.getUTCFullYear() + pad2(now.getUTCMonth() + 1) + pad2(now.getUTCDate()) + "T" +
+                pad2(now.getUTCHours()) + pad2(now.getUTCMinutes()) + pad2(now.getUTCSeconds()) + "Z";
+
+    var lines = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SEU Pharmacy//Exam Routine//EN",
+      "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+      "X-WR-CALNAME:" + icsEscape(examName() + " exams " + examSubjectText()),
+      "X-WR-TIMEZONE:Asia/Dhaka",
+      "BEGIN:VTIMEZONE", "TZID:Asia/Dhaka", "BEGIN:STANDARD", "DTSTART:19700101T000000",
+      "TZOFFSETFROM:+0600", "TZOFFSETTO:+0600", "TZNAME:+06", "END:STANDARD", "END:VTIMEZONE"
+    ];
+
+    list.forEach(function (e) {
+      var d = examDateOf(e);
+      var s = toMinutes(e.start), en = toMinutes(e.end);
+      if (!d || s === null || en === null) return;
+
+      var day = d.getUTCFullYear() + pad2(d.getUTCMonth() + 1) + pad2(d.getUTCDate());
+      var desc = e.title + "\nBatch: " + e.batch +
+        (e.teacher ? "\nCourse teacher: " + e.teacher : "") + (e.coinv ? "\nCo-invigilator: " + e.coinv : "") +
+        (teacher ? "\nYour duty: " + examRole(e, teacher) : "");
+
+      lines.push("BEGIN:VEVENT");
+      lines.push("UID:" + (e.course + "-" + e.batch + "-" + e.date + "-exam").replace(/[^A-Za-z0-9.\-]/g, "") + "@seu-pharmacy-routine");
+      lines.push("DTSTAMP:" + stamp);
+      lines.push("DTSTART;TZID=Asia/Dhaka:" + day + "T" + hhmmss(s));
+      lines.push("DTEND;TZID=Asia/Dhaka:" + day + "T" + hhmmss(en));
+      lines.push("SUMMARY:" + icsEscape(examName() + " exam: " + e.course + " " + e.title));
+      lines.push("LOCATION:" + icsEscape(e.room ? "Room " + e.room + ", Southeast University" : "Southeast University (room to be announced)"));
+      lines.push("DESCRIPTION:" + icsEscape(desc));
+      lines.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEscape("Exam tomorrow: " + e.course), "TRIGGER:-P1D", "END:VALARM");
+      lines.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEscape("Exam in 1 hour: " + e.course), "TRIGGER:-PT1H", "END:VALARM");
+      lines.push("END:VEVENT");
+    });
+
+    lines.push("END:VCALENDAR");
+    return lines.map(foldLine).join("\r\n") + "\r\n";
+  }
+
+  function examCalendar() {
+    var ics = buildExamIcs();
+    if (!ics) { alert("Please select your batch (or a teacher) first."); return; }
+    downloadText("Exams_" + (val("teacherFilter") || val("batchFilter")).replace(/[^A-Za-z0-9]/g, "") + ".ics", ics, "text/calendar");
   }
 
 
