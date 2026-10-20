@@ -1532,6 +1532,37 @@
     .pr-toast-error { background: #b91c1c; }
     @media (max-width: 600px) { .pr-toast { bottom: 84px; } }
 
+    /* Pull-to-refresh indicator */
+    #prPullIndicator {
+      position: fixed; top: 0; left: 50%; z-index: 300;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.22);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transform: translate(-50%, -60px);
+      transition: transform .18s ease, opacity .18s ease, background .1s linear;
+    }
+    #prPullIndicator svg { width: 19px; height: 19px; stroke: var(--primary); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+    #prPullIndicator.ready { background: var(--primary); }
+    #prPullIndicator.ready svg { stroke: #fff; }
+    #prPullIndicator.spin { transition: opacity .18s ease; }
+    #prPullIndicator.spin svg { animation: prSpin .7s linear infinite; }
+    @keyframes prSpin { to { transform: rotate(360deg); } }
+    html[data-theme="dark"] #prPullIndicator { background: #16212f; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+
+    /* Weekly grid: jump-to-today floating button (mobile only) */
+    #gridTodayBtn {
+      display: none; position: fixed; right: 16px; bottom: 82px; z-index: 150;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 1px; width: 52px; height: 52px; border-radius: 50%;
+      background: var(--primary); color: #fff; border: none;
+      box-shadow: 0 4px 14px rgba(16,24,40,.3);
+      font-size: 10px; font-weight: 700; padding: 0;
+    }
+    #gridTodayBtn .ic { width: 19px; height: 19px; }
+    #gridTodayBtn.show { display: flex; }
+    @media (min-width: 601px) { #gridTodayBtn { display: none !important; } }
+
 
 
 
@@ -2386,6 +2417,9 @@
 
 <div id="installSheet" class="install-sheet" role="dialog" aria-label="Install app"></div>
 
+<div id="prPullIndicator" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
+<button id="gridTodayBtn" onclick="scrollGridToToday()" aria-label="Jump to today"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Today</span></button>
+
 
 
 
@@ -2530,6 +2564,144 @@
   (function initDarkModeLabel() {
     var lbl = document.getElementById("darkModeLabel");
     if (lbl && document.documentElement.getAttribute("data-theme") === "dark") lbl.textContent = "Light mode";
+  })();
+
+  /* ===== Mobile helpers shared by swipe / pull-to-refresh / grid jump-to-today ===== */
+  function prIsMobile() { return window.innerWidth <= 600; }
+  function prAnyModalOpen() {
+    var cr = document.getElementById("conflictReport");
+    if (cr && window.getComputedStyle(cr).display !== "none") return true;
+    var cm = document.getElementById("coverGenModal");
+    if (cm && window.getComputedStyle(cm).display !== "none") return true;
+    var ins = document.getElementById("installSheet");
+    if (ins && ins.classList.contains("show")) return true;
+    return false;
+  }
+
+  /* ===== Weekly grid: sticky "jump to today" button (mobile) ===== */
+  function updateGridTodayBtn() {
+    var b = document.getElementById("gridTodayBtn");
+    if (!b) return;
+    var hasToday = !!document.querySelector(".grid-table .grid-day.today");
+    b.classList.toggle("show", view === "grid" && prIsMobile() && hasToday);
+  }
+  function scrollGridToToday() {
+    var row = document.querySelector(".grid-table tr.grid-today-row");
+    if (!row) return;
+    row.scrollIntoView({ behavior: "smooth", block: "center" });
+    var wrap = document.querySelector(".grid-wrapper");
+    var cell = row.querySelector(".grid-cell:not(:empty), .grid-entry");
+    if (wrap && cell) {
+      var target = cell.closest("td") || cell;
+      var left = target.offsetLeft - wrap.clientWidth / 2 + target.clientWidth / 2;
+      wrap.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    }
+  }
+  window.addEventListener("resize", updateGridTodayBtn);
+
+  /* ===== Mobile: swipe left/right between Today / Grid / Teacher tabs ===== */
+  (function () {
+    var NAV_ORDER = ["today", "week", "teacher"];
+    function currentNavIndex() {
+      var nt = document.getElementById("navTeacher");
+      if (nt && nt.className === "active") return 2;
+      var nw = document.getElementById("navWeek");
+      if (nw && nw.className === "active") return 1;
+      return 0;
+    }
+    function isHorizontallyScrollable(el) {
+      while (el && el !== document.body) {
+        if (el.scrollWidth > el.clientWidth + 2) {
+          var cs = window.getComputedStyle(el);
+          if (/(auto|scroll)/.test(cs.overflowX)) return true;
+        }
+        el = el.parentElement;
+      }
+      return false;
+    }
+    var sx = 0, sy = 0, tracking = false;
+    document.addEventListener("touchstart", function (e) {
+      tracking = false;
+      if (!prIsMobile() || typeof applied === "undefined" || !applied) return;
+      if (prAnyModalOpen()) return;
+      if (!e.touches || !e.touches.length) return;
+      if (isHorizontallyScrollable(e.target)) return;
+      if (e.target.closest && e.target.closest(".bottom-nav, input, select, textarea, a, .menu-list, details, #prPullIndicator")) return;
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+      tracking = true;
+    }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (!tracking) return;
+      tracking = false;
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      var idx = currentNavIndex();
+      var next = dx < 0 ? idx + 1 : idx - 1;
+      if (next < 0 || next > NAV_ORDER.length - 1) return;
+      navGo(NAV_ORDER[next]);
+    }, { passive: true });
+  })();
+
+  /* ===== Mobile: pull-to-refresh (drag down from the very top) ===== */
+  (function () {
+    var startY = 0, pulling = false, triggered = false;
+    var THRESHOLD = 70, MAX_PULL = 110;
+    var indicator;
+    function el() {
+      if (!indicator) indicator = document.getElementById("prPullIndicator");
+      return indicator;
+    }
+    document.addEventListener("touchstart", function (e) {
+      pulling = false; triggered = false;
+      if (!prIsMobile() || prAnyModalOpen()) return;
+      if (window.scrollY > 0) return;
+      if (!e.touches || !e.touches.length) return;
+      startY = e.touches[0].clientY;
+      pulling = true;
+    }, { passive: true });
+    document.addEventListener("touchmove", function (e) {
+      if (!pulling || !e.touches || !e.touches.length) return;
+      var dy = e.touches[0].clientY - startY;
+      if (dy <= 0 || window.scrollY > 0) { pulling = false; var ind = el(); if (ind) { ind.style.opacity = 0; ind.style.transform = "translate(-50%, -60px)"; } return; }
+      var dist = Math.min(dy * 0.5, MAX_PULL);
+      var ind = el();
+      if (ind) {
+        ind.style.opacity = Math.min(1, dist / THRESHOLD);
+        ind.style.transform = "translate(-50%, " + (-60 + dist) + "px) rotate(" + (dist * 2.4) + "deg)";
+        ind.classList.toggle("ready", dist >= THRESHOLD);
+      }
+    }, { passive: true });
+    document.addEventListener("touchend", function () {
+      if (!pulling) return;
+      pulling = false;
+      var ind = el();
+      var ready = ind && ind.classList.contains("ready");
+      if (ready && !triggered) {
+        triggered = true;
+        if (ind) {
+          ind.style.transform = "translate(-50%, 16px)";
+          ind.style.opacity = 1;
+          ind.classList.remove("ready");
+          ind.classList.add("spin");
+        }
+        showToast("Refreshing…");
+        loadRoutine();
+        setTimeout(function () {
+          if (ind) {
+            ind.classList.remove("spin");
+            ind.style.transform = "translate(-50%, -60px)";
+            ind.style.opacity = 0;
+          }
+        }, 1100);
+      } else if (ind) {
+        ind.style.transform = "translate(-50%, -60px)";
+        ind.style.opacity = 0;
+        ind.classList.remove("ready");
+      }
+    }, { passive: true });
   })();
 
 
@@ -3397,6 +3569,7 @@
     if (v !== "week") document.getElementById("dayFilter").value = "";
     updateTabs();
     applyFilters();
+    updateGridTodayBtn();
   }
 
 
@@ -4690,10 +4863,12 @@
 
     if (!batch && !val("teacherFilter")) {
       routine.innerHTML = "<div class='no-data'>Select your batch (or a teacher) above to see the weekly grid.</div>";
+      updateGridTodayBtn();
       return;
     }
     if (!rows.length) {
       routine.innerHTML = "<div class='no-data'>No matching classes found.</div>";
+      updateGridTodayBtn();
       return;
     }
 
@@ -4713,6 +4888,7 @@
 
 
     routine.innerHTML = legendHtml() + "<div class='swipe-hint'>↔ Swipe sideways to see all time slots</div><div class='grid-wrapper'>" + buildGridHtml(rows, true) + "</div>";
+    updateGridTodayBtn();
   }
 
 
