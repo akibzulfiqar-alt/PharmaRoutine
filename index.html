@@ -1675,6 +1675,11 @@
       #routine    { grid-column: 2; grid-row: 9; }
       .footer-links { grid-column: 1 / -1; grid-row: 10; }
       .grid-table, .table-wrapper, .grid-wrapper { min-width: 0; }
+      /* The sidebar is narrower than the old single-column layout, so the
+         toolbar's 4 buttons (Share / JPG / Cover Page / More) no longer fit
+         on one line — let them wrap instead of overflowing past the card. */
+      .toolbar { flex-wrap: wrap; }
+      .toolbar .btn-soft { flex: 1 1 auto; min-width: 110px; }
     }
 
     /* ===== Dark mode =====
@@ -1741,6 +1746,7 @@
     }
     html[data-theme="dark"] .app-updated { background: #0f1824; color: var(--muted); }
     html[data-theme="dark"] .app-updated b { color: var(--ink); }
+    html[data-theme="dark"] .menu-list button { color: var(--ink); }
     html[data-theme="dark"] .grid-cell { background: #16212f; }
     html[data-theme="dark"] .grid-table .grid-day:not(.today) { background: #16212f; color: var(--ink); }
     html[data-theme="dark"] .grid-empty { background: #121a26; }
