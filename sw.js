@@ -1,7 +1,7 @@
 /* Service worker: keeps the app itself (page, icons, libraries) available offline.
    The routine DATA is cached by the page itself (localStorage), not here.
    When you change index.html, bump VERSION so phones pick up the new copy. */
-const VERSION = "routine-v10";
+const VERSION = "routine-v11";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 
