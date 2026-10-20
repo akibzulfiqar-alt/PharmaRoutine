@@ -933,6 +933,58 @@
     }
     #conflictContent { padding: 20px; font-size: 16px; min-height: 80px; }
 
+    /* Cover Page Generator modal */
+    .cover-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,.45);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .cover-card {
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.35);
+    }
+    .cover-header {
+      background: var(--primary);
+      color: white;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 18px;
+      position: sticky;
+      top: 0;
+    }
+    .cover-header span { white-space: nowrap; font-weight: 600; }
+    .cover-body { padding: 18px; }
+    .cover-field { margin-bottom: 14px; }
+    .cover-field label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 5px; }
+    .cover-field input {
+      width: 100%; box-sizing: border-box; padding: 10px 12px; font-size: 15px;
+      border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit;
+    }
+    .cover-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cover-actions {
+      display: flex; gap: 10px; justify-content: flex-end; padding: 14px 18px;
+      border-top: 1px solid #e2e8f0; position: sticky; bottom: 0; background: white;
+    }
+    .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    @media (max-width: 480px) {
+      .cover-row2 { grid-template-columns: 1fr; }
+    }
+
 
 
 
@@ -1540,6 +1592,7 @@
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 
@@ -1752,7 +1805,7 @@
         <button class="btn btn-soft" id="shareTodayBtn" onclick="shareToday()"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="shareTodayLabel">Share today's routine</span></button>
         <button class="btn btn-icon" id="jpgBtn" onclick="downloadRoutineJPG()" title="Save as JPG" aria-label="Save as JPG"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
         <!-- Reserved for the Cover Page Generator (future feature). Remove style="display:none" and add the real onclick when ready. -->
-        <button class="btn btn-icon" id="coverPageBtn" style="display:none;" title="Cover page generator" aria-label="Cover page generator"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+        <button class="btn btn-icon" id="coverPageBtn" onclick="openCoverGenerator()" title="Cover page generator" aria-label="Cover page generator"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
         <details class="menu" id="moreMenu">
           <summary class="btn btn-ghost"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg> More</summary>
           <div class="menu-list">
@@ -2015,6 +2068,46 @@
         <button class="close-btn" onclick="closeConflictReport()">Close</button>
       </div>
       <div id="conflictContent"></div>
+    </div>
+  </div>
+
+  <div id="coverGenModal" class="cover-modal">
+    <div class="cover-card">
+      <div class="cover-header">
+        <span>📄 Assignment Cover Page</span>
+        <button class="close-btn" onclick="closeCoverGenerator()">Close</button>
+      </div>
+      <div class="cover-body">
+        <div class="cover-row2">
+          <div class="cover-field"><label>University Name</label><input id="cpUni" type="text" value="Southeast University"></div>
+          <div class="cover-field"><label>Department</label><input id="cpDept" type="text" value="Department of Pharmacy"></div>
+        </div>
+        <div class="cover-row2">
+          <div class="cover-field"><label>Course Title</label><input id="cpCourseTitle" type="text" placeholder="e.g. Pharmaceutical Microbiology"></div>
+          <div class="cover-field"><label>Course Code</label><input id="cpCourseCode" type="text" placeholder="e.g. PHR 304"></div>
+        </div>
+        <div class="cover-field"><label>Assignment Title / Topic</label><input id="cpAssignTitle" type="text" placeholder="e.g. Antibiotic Resistance Mechanisms"></div>
+        <div class="cover-row2">
+          <div class="cover-field"><label>Assignment No.</label><input id="cpAssignNo" type="text" placeholder="e.g. 02"></div>
+          <div class="cover-field"><label>Submission Date</label><input id="cpSubDate" type="date"></div>
+        </div>
+        <div class="cover-row2">
+          <div class="cover-field"><label>Student Name</label><input id="cpStudentName" type="text" placeholder="Your full name"></div>
+          <div class="cover-field"><label>Student ID</label><input id="cpStudentId" type="text" placeholder="e.g. 2021xxxxxx"></div>
+        </div>
+        <div class="cover-row2">
+          <div class="cover-field"><label>Batch &amp; Section</label><input id="cpBatchSection" type="text" placeholder="e.g. 50-C"></div>
+          <div class="cover-field"><label>Semester</label><input id="cpSemester" type="text" placeholder="e.g. FALL 2026"></div>
+        </div>
+        <div class="cover-row2">
+          <div class="cover-field"><label>Submitted To (Teacher)</label><input id="cpTeacherName" type="text" placeholder="Teacher's name"></div>
+          <div class="cover-field"><label>Designation</label><input id="cpTeacherDesig" type="text" placeholder="e.g. Lecturer"></div>
+        </div>
+      </div>
+      <div class="cover-actions">
+        <button class="btn btn-ghost" onclick="closeCoverGenerator()">Cancel</button>
+        <button class="btn btn-primary" onclick="generateCoverPDF()">Generate PDF</button>
+      </div>
     </div>
   </div>
 
@@ -8685,6 +8778,133 @@
 
 
 
+
+  function openCoverGenerator() {
+    ["cpCourseTitle", "cpCourseCode", "cpAssignTitle", "cpAssignNo",
+     "cpStudentName", "cpStudentId", "cpBatchSection", "cpTeacherName", "cpTeacherDesig"
+    ].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = "";
+    });
+    var uniEl = document.getElementById("cpUni");
+    var deptEl = document.getElementById("cpDept");
+    if (uniEl && !uniEl.value) uniEl.value = "Southeast University";
+    if (deptEl && !deptEl.value) deptEl.value = "Department of Pharmacy";
+    var semEl = document.getElementById("cpSemester");
+    if (semEl) semEl.value = meta.semester || "";
+    var dateEl = document.getElementById("cpSubDate");
+    if (dateEl) {
+      var d = new Date();
+      var mm = String(d.getMonth() + 1).padStart(2, "0");
+      var dd = String(d.getDate()).padStart(2, "0");
+      dateEl.value = d.getFullYear() + "-" + mm + "-" + dd;
+    }
+    var modal = document.getElementById("coverGenModal");
+    modal.style.display = "flex";
+  }
+
+  function closeCoverGenerator() {
+    document.getElementById("coverGenModal").style.display = "none";
+  }
+
+  function formatCoverDate(iso) {
+    if (!iso) return "";
+    var parts = iso.split("-");
+    if (parts.length !== 3) return iso;
+    var months = ["January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"];
+    var mi = parseInt(parts[1], 10) - 1;
+    return parseInt(parts[2], 10) + " " + (months[mi] || parts[1]) + " " + parts[0];
+  }
+
+  function generateCoverPDF() {
+    var v = function (id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    };
+    var studentName = v("cpStudentName");
+    var courseTitle = v("cpCourseTitle");
+    if (!studentName || !courseTitle) {
+      alert("Please fill in at least the Course Title and Student Name.");
+      return;
+    }
+    if (typeof window.jspdf === "undefined" || typeof html2canvas === "undefined") {
+      alert("PDF tools are still loading. Please try again in a moment.");
+      return;
+    }
+
+    var uni = v("cpUni") || "Southeast University";
+    var dept = v("cpDept") || "Department of Pharmacy";
+    var courseCode = v("cpCourseCode");
+    var assignTitle = v("cpAssignTitle");
+    var assignNo = v("cpAssignNo");
+    var subDate = formatCoverDate(v("cpSubDate"));
+    var studentId = v("cpStudentId");
+    var batchSection = v("cpBatchSection");
+    var semester = v("cpSemester");
+    var teacherName = v("cpTeacherName");
+    var teacherDesig = v("cpTeacherDesig");
+
+    function row(label, value) {
+      if (!value) return "";
+      return "<tr>" +
+        "<td style='padding:9px 0;font-weight:700;color:#1f4e78;width:190px;vertical-align:top;'>" + esc(label) + "</td>" +
+        "<td style='padding:9px 0;color:#0f172a;'>" + esc(value) + "</td>" +
+        "</tr>";
+    }
+
+    var printArea = document.createElement("div");
+    printArea.style.cssText =
+      "background:#ffffff;width:794px;min-height:1123px;box-sizing:border-box;" +
+      "padding:70px 60px;font-family:Arial, sans-serif;position:absolute;left:-10000px;top:0;";
+
+    printArea.innerHTML =
+      "<div style='text-align:center;border-bottom:3px solid #1f4e78;padding-bottom:24px;margin-bottom:34px;'>" +
+      "<img src='university-logo.png' style='max-width:320px;max-height:90px;object-fit:contain;' onerror=\"this.style.display='none'\">" +
+      "<div style='font-size:24px;font-weight:800;color:#1f4e78;margin-top:14px;'>" + esc(uni) + "</div>" +
+      "<div style='font-size:17px;color:#475569;margin-top:4px;'>" + esc(dept) + "</div>" +
+      "</div>" +
+      "<div style='text-align:center;margin-bottom:34px;'>" +
+      "<div style='display:inline-block;border:2px solid #1f4e78;border-radius:8px;padding:10px 28px;font-size:20px;font-weight:800;letter-spacing:1px;color:#1f4e78;'>ASSIGNMENT</div>" +
+      (assignTitle ? "<div style='font-size:19px;font-weight:700;color:#0f172a;margin-top:18px;'>" + esc(assignTitle) + "</div>" : "") +
+      "</div>" +
+      "<table style='width:100%;border-collapse:collapse;font-size:15px;margin-bottom:30px;'>" +
+      row("Course Title", courseTitle) +
+      row("Course Code", courseCode) +
+      row("Assignment No.", assignNo) +
+      row("Submission Date", subDate) +
+      row("Semester", semester) +
+      "</table>" +
+      "<div style='border-top:1px solid #cbd5e1;margin:10px 0 24px;'></div>" +
+      "<table style='width:100%;border-collapse:collapse;font-size:15px;margin-bottom:30px;'>" +
+      row("Submitted By", studentName) +
+      row("Student ID", studentId) +
+      row("Batch & Section", batchSection) +
+      "</table>" +
+      "<div style='border-top:1px solid #cbd5e1;margin:10px 0 24px;'></div>" +
+      "<table style='width:100%;border-collapse:collapse;font-size:15px;'>" +
+      row("Submitted To", teacherName) +
+      row("Designation", teacherDesig) +
+      "</table>";
+
+    document.body.appendChild(printArea);
+
+    html2canvas(printArea, { scale: 2, backgroundColor: "#ffffff" }).then(function (canvas) {
+      var jsPDFCtor = window.jspdf.jsPDF;
+      var pdf = new jsPDFCtor("p", "mm", "a4");
+      var pageWidth = pdf.internal.pageSize.getWidth();
+      var pageHeight = (canvas.height * pageWidth) / canvas.width;
+      var imgData = canvas.toDataURL("image/jpeg", 0.95);
+      pdf.addImage(imgData, "JPEG", 0, 0, pageWidth, Math.min(pageHeight, pdf.internal.pageSize.getHeight()));
+      var fileName = "Cover_" + (studentId || studentName).replace(/[^A-Za-z0-9_-]/g, "") + ".pdf";
+      pdf.save(fileName);
+      printArea.remove();
+      closeCoverGenerator();
+    }).catch(function () {
+      printArea.remove();
+      alert("Could not generate the PDF. Please try again.");
+    });
+  }
 
   loadRoutine();
   scheduleInstallPrompt();
